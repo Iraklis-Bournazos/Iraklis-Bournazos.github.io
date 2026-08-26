@@ -250,7 +250,7 @@ def build_home(projects):
 def build_project(p):
     links = ""
     if p.get("report"):
-        links += (f'<a class="btn primary" href="../files/{p["report"]}">'
+        links += (f'<a class="btn primary" href="../files/projects/{p["report"]}">'
                   f'Read the full report (PDF)</a>')
     links += "".join(
         f'<a class="btn" href="{l["url"]}">{esc(l["label"])}</a>'
@@ -384,8 +384,21 @@ def write_seo_files(projects):
     (ROOT / ".nojekyll").write_text("", encoding="utf-8")
 
 
+def check_reports(projects):
+    """Fail loudly if a project points at a report PDF that does not exist."""
+    missing = []
+    for p in projects:
+        if p.get("report") and not (ROOT / "files" / "projects" / p["report"]).exists():
+            missing.append(f"  {p['slug']}: files/projects/{p['report']}")
+    if missing:
+        print("\n!! MISSING REPORT FILES — these download buttons will not work:")
+        print("\n".join(missing))
+        print()
+
+
 def main():
     projects = load_projects()
+    check_reports(projects)
     build_home(projects)
     build_cv()
     write_seo_files(projects)
