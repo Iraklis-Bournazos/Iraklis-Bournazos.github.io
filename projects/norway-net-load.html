@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Municipal-scale net load forecasting for Norway — Iraklis Bournazos</title>
-<meta name="description" content="Day-ahead net load forecasts for 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most interesting">
+<meta name="description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful ">
 <link rel="canonical" href="https://iraklis-bournazos.github.io/projects/norway-net-load.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Municipal-scale net load forecasting for Norway — Iraklis Bournazos">
-<meta property="og:description" content="Day-ahead net load forecasts for 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most interesting">
+<meta property="og:description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful ">
 <meta property="og:url" content="https://iraklis-bournazos.github.io/projects/norway-net-load.html">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -38,66 +38,90 @@
     <a class="back" href="../index.html#work">← All work</a>
     <p class="project-meta">MSc thesis · rebase.energy &amp; KTH · 2026</p>
     <h1>Municipal-scale net load forecasting for Norway</h1>
-    <p class="role">Day-ahead net load forecasts for 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most interesting result is a negative one.</p>
+    <p class="role">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful result is a negative one.</p>
     <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">ERA5</span><span class="tag">GeoPandas</span></div>
-    <div class="contact-row"><a class="btn" href="https://github.com/Iraklis-Bournazos/norway-net-load-forecasting">Code on GitHub</a></div>
+    <div class="contact-row"><a class="btn primary" href="../files/msc-thesis-net-load-forecasting-norway.pdf">Read the full report (PDF)</a><a class="btn" href="https://github.com/Iraklis-Bournazos/norway-net-load-forecasting">Code on GitHub</a></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <article class="prose"><h2 id="the-problem">The problem</h2>
-<p>Distribution system operators, traders and flexibility providers all need to know what the
-next day&rsquo;s load looks like at the grid boundary. That boundary is moving. Norway&rsquo;s
+<p>Distribution system operators, traders and flexibility providers all need to know what
+tomorrow&rsquo;s load looks like at the grid boundary. That boundary is moving. Norway&rsquo;s
 <em>Plusskunde</em> net-metering scheme lets households with installations up to 100 kW export
-surplus generation, and rooftop solar has been spreading quickly. What a meter records is
-no longer consumption — it is consumption minus whatever the roof happened to produce.</p>
-<p>The question I set out to answer was whether you can forecast that net load, at municipal
-resolution, across an entire country, using nothing but publicly available data.</p>
+surplus generation, and rooftop solar has spread quickly.</p>
+<p>The consequence is the <strong>behind-the-meter invisibility problem</strong>. What a DSO measures is
+net load — gross consumption minus whatever the roof produced and the household consumed
+on site. Self-consumed solar never crosses any metering point the operator owns, so it is
+structurally unobservable from the operator&rsquo;s own data. The DSO sees only the difference
+and cannot decompose it.</p>
+<p>My question: can you forecast that net load, at municipal resolution, across an entire
+country, using nothing but public data?</p>
 <h2 id="the-data">The data</h2>
-<p>Everything comes from open sources. Elhub publishes hourly AMI metering data for Norway,
-already disaggregated by consumer category — private residential, commercial and industrial
-— along with solar export records and daily snapshots of installed solar capacity. Weather
-comes from ERA5 reanalysis. No proprietary datasets, which means the results are
-reproducible by anyone.</p>
-<h2 id="the-framework">The framework</h2>
-<p>The work is structured as three empirical stages rather than a single model:</p>
+<p>Elhub publishes hourly AMI metering for Norway, already split by consumer category —
+private residential, commercial and industrial — along with solar export records and daily
+installed-capacity snapshots. Weather comes from ERA5 reanalysis, matched to each
+municipality by a weather-station selection procedure that picks the most representative
+grid cell. No proprietary data anywhere, so the results are reproducible.</p>
+<h2 id="three-stages-not-one-model">Three stages, not one model</h2>
 <ol>
-<li><strong>A national weather feature ablation</strong> across all 350 municipalities, to establish which
+<li><strong>National weather feature ablation</strong> across all 350 municipalities, to find which
    weather variables actually earn their place.</li>
-<li><strong>A six-fold expanding-window walk-forward evaluation</strong> on eight representative
-   municipalities chosen to span the full range of solar penetration, comparing several
-   modelling approaches.</li>
-<li><strong>A three-fold national validation</strong> on the unseen 2025 calendar year.</li>
+<li><strong>Six-fold expanding-window walk-forward evaluation</strong> on eight municipalities chosen to
+   span the full solar-penetration spectrum, comparing several model formulations.</li>
+<li><strong>Three-fold national validation</strong> over the unseen 2025 calendar year.</li>
 </ol>
-<p>Forecasting is done per consumer segment, because the three segments turn out to be
-genuinely different problems rather than three instances of one problem.</p>
-<h2 id="what-came-out">What came out</h2>
-<p>For private residential net load, a conservative municipality-level assignment strategy —
-deploying a prosumer-aware LightGBM model only in the 48 municipalities where improvement
-was consistent across every fold, and a weather-based model in the remaining 302 — beat the
-seasonal naive benchmark in 349 of 350 municipalities, and never underperformed the
-weather-based model anywhere in the portfolio. Commercial load followed a similar pattern.</p>
-<p>Industrial net load did not. It is a structurally different problem: weather-and-calendar
-features hit their generalisation limit because facility-level production patterns vary too
-much between municipalities to be captured by any shared representation.</p>
-<h2 id="the-negative-result-which-is-the-interesting-one">The negative result, which is the interesting one</h2>
-<p>Adding solar information to the residential model helped almost not at all. The obvious
-reading is that the model architecture is inadequate. A controlled synthetic experiment says
-otherwise: when the same model is given exact, noiseless capacity information, it improves
-consistently, with gains of +0.16 to +0.37 percentage points across several solar growth
-scenarios.</p>
-<p>So the limit is not architectural. It is <strong>structural behind-the-meter invisibility</strong> —
-combined with still-low penetration and a prosumer registry that is heterogeneous between
-municipalities. The signal is not in the public data yet, and no amount of modelling
-recovers information that was never recorded.</p>
-<p>This matters practically. If you are a DSO deciding whether to invest in better forecasting
-models or in better visibility of distributed generation, this result says: fix the
-visibility first.</p>
+<p>Forecasting runs per consumer segment, because the three segments turn out to be different
+problems rather than three instances of one.</p>
+<h2 id="what-the-results-say">What the results say</h2>
+<p>Temperature dominates everything. The ablation puts its contribution at <strong>+5.74 percentage
+points</strong> of MAPE reduction for residential load, +4.21 pp for commercial and +2.00 pp for
+industrial.</p>
+<p>The weather-based LightGBM model became the national default. For residential net load it
+reaches a mean annual municipality MAPE of <strong>6.69%</strong>, beating the seasonal naive benchmark
+in <strong>347 of 350 municipalities</strong> and the best linear-regression baseline in 246 of 350.
+Commercial load reaches 9.66% MAPE, winning in 313 of 350 against naive.</p>
+<p>The linear baseline is not merely worse — it <em>collapses</em> on industrial load, at 63.3%
+annual mean MAPE. That is the cleanest evidence in the thesis that the non-linear
+architecture is a structural necessity here rather than a fashionable choice.</p>
+<h2 id="the-negative-result-which-is-the-useful-one">The negative result, which is the useful one</h2>
+<p>The prosumer-aware model — the one given solar capacity and export features — produced no
+systematic national improvement. Its mean gain was <strong>−0.03 pp</strong> across 350 municipalities.
+No penetration tier showed a robust win.</p>
+<p>The obvious conclusion is that the model is inadequate. A controlled synthetic experiment
+says otherwise: given exact, noiseless capacity information, the same architecture improves
+consistently across every growth scenario and every fold, by <strong>+0.16 to +0.37 pp</strong>.</p>
+<p>So the architecture is sound and the failure is in the data. Three causes, all structural:
+behind-the-meter invisibility, solar penetration that is still low, and contamination in the
+registry itself — Elhub&rsquo;s E19 metering category pools residential, commercial, agricultural
+and industrial generation together, each with different self-consumption ratios and diurnal
+profiles, so using it as a residential-solar proxy imports noise that cannot be removed
+without disaggregating the registry.</p>
+<p><strong>This matters for anyone deciding where to spend money.</strong> If a DSO is choosing between
+better forecasting models and better visibility of distributed generation, this says: fix
+the visibility first. The models are already ahead of the data.</p>
+<p>The operational answer under current conditions is a conservative portfolio: deploy the
+prosumer-aware model only in the 48 municipalities (13.7%) where it improves consistently
+across every fold, and the weather-based model everywhere else. That never underperforms
+the weather-based model anywhere in the portfolio.</p>
+<h2 id="industrial-load-is-a-different-problem">Industrial load is a different problem</h2>
+<p>Norwegian industrial consumption concentrates in large energy-intensive facilities running
+on production schedules that have little to do with weather or calendars. Weather-and-calendar
+features reach their generalisation limit, and the win rate against naive sits near 50%.
+The recommendation is a two-category hybrid — seasonal naive for continuous-process
+municipalities, and the weather model with spot-price features for heterogeneous urban ones.</p>
+<h2 id="being-honest-about-the-ceiling">Being honest about the ceiling</h2>
+<p>The reported accuracy is an <strong>upper bound</strong>, not an operational figure. Weather features come
+from ERA5 reanalysis — historically observed conditions, not forecasts. In production, NWP
+forecast error would degrade this. ERA5&rsquo;s ~31 km grid also cannot resolve sub-municipal
+variation, so municipalities where the load centre sits away from the assigned cell — fjord
+microclimates, elevation differences, spatially concentrated industry — carry a systematic
+mismatch.</p>
 <h2 id="context">Context</h2>
-<p>Carried out at <a href="https://www.rebase.energy/">rebase.energy</a> in Stockholm as my KTH degree
-project, supervised by Valgerður Jónsdóttir, Ilias Dimoulkas and Sebastian Haglund, and
-examined by Lars Nordström.</p></article>
+<p>Carried out at <a href="https://www.rebase.energy/">rebase.energy</a> as my KTH degree project.
+Supervisors: Valgerður Jónsdóttir, Ilias Dimoulkas and Sebastian Haglund. Examiner: Lars
+Nordström.</p></article>
   </div>
 </section>
 

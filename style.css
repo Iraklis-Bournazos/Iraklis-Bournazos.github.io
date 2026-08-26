@@ -660,3 +660,31 @@ ul.cols2 li { break-inside: avoid; }
   .cv-skill { font-size: 8.45pt; color: #222 !important; margin-bottom: 2px; }
   .cv-skill b { color: #000 !important; }
 }
+
+/* tables inside project write-ups */
+.prose .table-wrap { overflow-x: auto; margin: 0 0 20px; }
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.88rem;
+  margin: 0;
+}
+.prose th, .prose td {
+  text-align: left;
+  padding: 8px 14px 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+  white-space: nowrap;
+}
+.prose th {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  font-weight: 500;
+  border-bottom-color: var(--line);
+}
+.prose td { color: var(--text-soft); }
+.prose td:first-child { color: var(--text); }
+.prose tbody tr:last-child td { border-bottom: none; }
+.prose td strong { color: var(--text); }

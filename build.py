@@ -51,7 +51,9 @@ def read_raw(path):
 
 def md(text):
     MD.reset()
-    return MD.convert((text or "").strip())
+    html_out = MD.convert((text or "").strip())
+    return re.sub(r"(<table>.*?</table>)",
+                  r'<div class="table-wrap">\1</div>', html_out, flags=re.S)
 
 
 def esc(text):

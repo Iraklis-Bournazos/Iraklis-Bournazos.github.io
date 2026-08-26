@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wind farm feasibility study, central Sweden — Iraklis Bournazos</title>
-<meta name="description" content="Technical and economic assessment of an 80 MW wind farm in a mountainous site in bidding zone SE3 — turbine selection through to battery sizing and LC">
+<title>Wind farm feasibility study, Skärvagshållan — Iraklis Bournazos</title>
+<meta name="description" content="Technical and economic assessment of an 80 MW wind farm in mountainous central Sweden, where two of the obvious answers turned out to be wrong once th">
 <link rel="canonical" href="https://iraklis-bournazos.github.io/projects/wind-farm-feasibility.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Wind farm feasibility study, central Sweden — Iraklis Bournazos">
-<meta property="og:description" content="Technical and economic assessment of an 80 MW wind farm in a mountainous site in bidding zone SE3 — turbine selection through to battery sizing and LC">
+<meta property="og:title" content="Wind farm feasibility study, Skärvagshållan — Iraklis Bournazos">
+<meta property="og:description" content="Technical and economic assessment of an 80 MW wind farm in mountainous central Sweden, where two of the obvious answers turned out to be wrong once th">
 <meta property="og:url" content="https://iraklis-bournazos.github.io/projects/wind-farm-feasibility.html">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -37,42 +37,89 @@
   <div class="wrap">
     <a class="back" href="../index.html#work">← All work</a>
     <p class="project-meta">KTH EG2340 · 2025 · team project</p>
-    <h1>Wind farm feasibility study, central Sweden</h1>
-    <p class="role">Technical and economic assessment of an 80 MW wind farm in a mountainous site in bidding zone SE3 — turbine selection through to battery sizing and LCOE.</p>
-    <div class="tags"><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">LCOE / NPV</span><span class="tag">BESS sizing</span></div>
-    <div class="contact-row"><a class="btn" href="https://github.com/tilfra/WindProject_Team2">Code on GitHub</a></div>
+    <h1>Wind farm feasibility study, Skärvagshållan</h1>
+    <p class="role">Technical and economic assessment of an 80 MW wind farm in mountainous central Sweden, where two of the obvious answers turned out to be wrong once the details were modelled.</p>
+    <div class="tags"><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">Jensen wake model</span><span class="tag">LCOE / NPV</span><span class="tag">BESS sizing</span></div>
+    <div class="contact-row"><a class="btn primary" href="../files/eg2340-wind-farm-feasibility.pdf">Read the full report (PDF)</a><a class="btn" href="https://github.com/tilfra/WindProject_Team2">Code on GitHub</a></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <article class="prose"><h2 id="scope">Scope</h2>
-<p>A full feasibility study for an <strong>80 MW wind farm</strong> on a mountainous site near Idre fjäll, in
-bidding zone <strong>SE3</strong>. Not a modelling exercise in isolation — the question was whether this
-particular project should be built.</p>
-<h2 id="turbine-technology">Turbine technology</h2>
-<p>The study starts by comparing the four generator concepts — the fixed-speed Danish concept,
-variable resistance, doubly-fed induction generator, and full converter — and then narrows by
-wind class, turbine size, cold-climate package and sound emissions, which matter a great deal
-at a mountainous Swedish site.</p>
-<p>The selected turbine was the <strong>Vestas V136-3.45</strong>, arranged in a <strong>staggered formation</strong> with
-an <strong>open-ring electrical layout</strong> after comparing several topological and electrical
-alternatives.</p>
-<h2 id="grid-connection-and-economics">Grid connection and economics</h2>
-<p>Grid connection options were explored and costed. Net present value and levelised cost of
-energy were then calculated across a range of investment costs rather than a single point
-estimate.</p>
-<p>That range is where the study earns its keep. <strong>At the lower bound of investment cost the
-project is profitable; at the upper bound it is not.</strong> The feasibility of the project is
-decided by an assumption, not by the wind resource — which is a more useful conclusion than
-a single confident NPV figure would have been.</p>
+<p>A full feasibility study for an <strong>80 MW onshore wind farm</strong> at Skärvagshållan, a mountainous
+site in central Sweden inside bidding zone <strong>SE3</strong>. Turbine technology, layout, grid
+connection, economics and storage — the question being whether this project should be built,
+not whether it could be modelled.</p>
+<p>The headline finding is that <strong>technical feasibility was never the constraint</strong>. Economics
+and the grid connection dominated the assessment. Two specific results changed the answer
+from what the obvious approach would have given.</p>
+<h2 id="turbine-and-siting">Turbine and siting</h2>
+<p>After comparing the four generator concepts — fixed-speed Danish, variable resistance, DFIG
+and full converter — the <strong>Vestas V136 with a full converter</strong> was selected on wind class,
+cold-climate package, turbulence tolerance and transportability into complex terrain.</p>
+<p>Production was modelled with the manufacturer power curve and the <strong>Jensen wake model</strong>, then
+validated against the independent <strong>Renewables.ninja</strong> benchmark, which agreed closely on
+capacity factor. The Enercon alternative required a cubic approximation of its power curve,
+and that approximation systematically overestimated yield — a reminder that turbine choice
+and data quality shape the credibility of everything downstream.</p>
+<h2 id="first-surprise-the-better-layout-does-not-fit">First surprise: the better layout does not fit</h2>
+<p>An arced, ridge-aligned configuration at 7D spacing gives higher annual energy production
+and lower wake losses than a staggered layout — exactly what theory predicts for turbines
+following the prevailing wind along an exposed ridge.</p>
+<p>It needs roughly <strong>13.9 km by 12.8 km</strong> of site to do it. That does not fit. Compress the
+spacing to 4D so it does fit, and wake losses rise until production falls <em>below</em> the
+staggered layout.</p>
+<p>So the two-row staggered arrangement won — not because it is aerodynamically superior but
+because it is the best thing that fits inside the property boundary. Layout optimisation
+without land constraints produces an answer you cannot build.</p>
+<h2 id="second-surprise-the-cheapest-grid-connection-is-infeasible">Second surprise: the cheapest grid connection is infeasible</h2>
+<p>Nine candidate connection buses were assessed. Ignore line impedance, and all nine
+comfortably accommodate 80 MW — and the low-voltage 10 kV node looks best, because
+connection charges scale with voltage level.</p>
+<p>Include realistic line impedance and the ranking inverts. Voltage rise from the wind
+injection pushes the 10 kV point far past its limit, and even the 20 kV bus hits the ceiling
+at minimum load. Only the <strong>70 kV side of the 20/70 kV transformer</strong> stays inside grid-code
+limits.</p>
+<p>Reactive power capability helps — operating at 0.95 capacitive raises the admissible
+capacity at every node — but at 80 MW it was never the binding constraint. The impedance
+was.</p>
+<h2 id="economics-the-assumption-decides-the-project">Economics: the assumption decides the project</h2>
+<p>Net present value and LCOE across the investment-cost range, over a 25-year lifetime:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Investment cost</th>
+<th>NPV</th>
+<th>LCOE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≈ 0.852 BSEK (low)</td>
+<td><strong>+109.11 MSEK</strong></td>
+<td>361.6 SEK/MWh — below captured price</td>
+</tr>
+<tr>
+<td>≈ 1.58 BSEK (high)</td>
+<td><strong>−622.02 MSEK</strong></td>
+<td>573.2 SEK/MWh — above captured price</td>
+</tr>
+</tbody>
+</table></div>
+<p>The grid connection alone contributes about 187 MSEK. The project is profitable or it is a
+disaster depending on which end of the cost range materialises — which is a far more useful
+conclusion than a single confident NPV would have been.</p>
 <h2 id="storage">Storage</h2>
-<p>Finally, a hybrid battery energy storage system was evaluated against SE3 price data. Adding
-storage increases total revenue, and the optimal battery size shifts with the assumed
-investment cost — so the storage decision is coupled to the same uncertainty as the farm
-itself.</p>
+<p>A hybrid BESS was evaluated against SE3 prices under a constrained 20 MW export connection.
+A <strong>45 MWh battery</strong> — a little over half an hour of full farm output — raises annual net
+revenue by about <strong>4.6%</strong> net of its own investment cost, mostly by rescuing energy that
+would otherwise be curtailed.</p>
+<p>Tripling it to 133 MWh raises revenue further but by much less than three times: clear
+diminishing returns past a size set by the grid constraint, not by the wind. Larger
+batteries only make sense if cell costs fall to around 300 000 SEK/MWh.</p>
 <h2 id="team">Team</h2>
-<p>Team 2: Iraklis Bournazos, Tilde Franzén, Victor Pettersson, Berzan Uyar and Mingyu Xie.</p></article>
+<p>Iraklis Bournazos, Tilde Franzén, Victor Pettersson, Berzan Uyar and Mingyu Xie.</p></article>
   </div>
 </section>
 

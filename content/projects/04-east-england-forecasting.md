@@ -2,40 +2,64 @@
 title: Probabilistic renewable forecasting, East England
 meta: KTH EG2140 · 2025 · IEEE competition sponsored by Ørsted and rebase.energy
 summary: >
-  Day-ahead probabilistic forecasts of combined wind and solar output for Hornsea 1 and East
-  England solar, submitted as quantiles and scored on pinball loss.
-tags: [Python, LightGBM, CatBoost, Random forest, Pinball loss]
+  Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, scored on pinball
+  loss — landing inside the range of the competition's top fifteen entries.
+tags: [Python, CatBoost, LightGBM, Quantile stacking, Pinball loss]
+report: eg2140-east-england-forecasting.pdf
 ---
 
 ## The task
 
-An IEEE Power & Energy Society competition, sponsored by Ørsted and rebase.energy: forecast
+An IEEE Power & Energy Society competition sponsored by Ørsted and rebase.energy: forecast
 the combined wind and solar generation of **Hornsea 1** — a 1.2 GW offshore wind farm 120 km
-off the Yorkshire coast — together with East England's solar capacity.
+off the Yorkshire coast — together with East England's solar output.
 
-Forecasts were day-ahead, for each half-hour period, submitted as **quantiles in 10%
-increments from 10% to 90%** and scored on pinball loss. Models were trained and tested on
-2020–2023 data, with the explicit aim of beating previous competitors' results.
+Day-ahead, for each half-hour period, submitted as **quantiles from 10% to 90%** and scored
+on pinball loss. Trained and tested on 2020–2023.
 
 ## Why probabilistic
 
-A point forecast of wind output answers the wrong question. If you are deciding how much
-reserve to hold, or what to bid, you need to know how wrong the forecast might be and in
-which direction. Pinball loss rewards exactly that: a model that is confident when it should
-be and uncertain when it should be.
+A point forecast of wind output answers the wrong question. If you are sizing reserve or
+placing a bid, you need to know how wrong the forecast might be and in which direction.
+Pinball loss rewards exactly that — being confident when confidence is warranted and
+uncertain when it is not.
 
-This was my first serious work with quantile forecasting, and the technique is the direct
-ancestor of what I now do professionally on imbalance volumes.
+This was my first serious quantile forecasting work, and it is the direct ancestor of what I
+now do professionally on imbalance volumes.
 
 ## Approach
 
-Random forest regression, LightGBM and CatBoost, each trained on generation-site data, then
-combined into an **ensemble producing a weighted combination of their predictions**.
-Evaluated across several error measures in addition to the competition metric.
+Three base models — random forest, LightGBM and CatBoost — then a **stacked ensemble**. For
+each quantile level separately, the base models' validation predictions become input
+features to a meta-model trained with `QuantileRegressor` under pinball loss. That lets the
+ensemble weight the base models differently *per quantile*, which matters because a model
+good at the median is not necessarily good in the tails.
 
-The ensemble was the strongest model, which is the expected result but worth confirming
-empirically — it inherits each component's strengths and averages out their individual
-failure modes.
+## Results
+
+| Model | MAE (MWh) | R² | Pinball (MWh) |
+|---|---|---|---|
+| Naive benchmark | 146.28 | 0.459 | 73.14 |
+| LightGBM | 131.02 | 0.604 | 30.45 |
+| Random forest | 79.40 | 0.836 | 34.21 |
+| CatBoost | 74.65 | 0.841 | 30.08 |
+| **Ensemble** | 75.85 | **0.844** | **29.39** |
+
+The ensemble cut pinball loss by roughly **60% against the naive benchmark** and lifted R²
+from 0.46 to 0.84. **The competition's top fifteen entries scored between 22.18 and 33.92
+MWh, so 29.39 sits inside that band.**
+
+Feature importance came out where physics says it should: solar radiation dominates the
+solar forecast, wind speed the wind forecast.
+
+## What I would fix
+
+LightGBM was the weak link — clearly worse on wind. Interestingly it was also the only model
+showing *no* overfitting, with near-identical train and test scores, while the others all
+degraded. Because ensemble weights come from validation performance, its weakness was
+largely absorbed rather than propagated, but tuning it properly would add robustness rather
+than just accuracy. Clipping quantile outputs to physical capacity limits is the other
+obvious improvement — the model has no idea Hornsea 1 cannot exceed 1.2 GW.
 
 ## Context
 
