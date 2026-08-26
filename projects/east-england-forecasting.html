@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probabilistic renewable forecasting, East England — Iraklis Bournazos</title>
+<meta name="description" content="Day-ahead probabilistic forecasts of combined wind and solar output for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball">
+<link rel="canonical" href="https://iraklis-bournazos.github.io/projects/east-england-forecasting.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Probabilistic renewable forecasting, East England — Iraklis Bournazos">
+<meta property="og:description" content="Day-ahead probabilistic forecasts of combined wind and solar output for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball">
+<meta property="og:url" content="https://iraklis-bournazos.github.io/projects/east-england-forecasting.html">
+<meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Iraklis Bournazos</a>
+    <nav class="topnav">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#background" class="hide-sm">Background</a>
+      <a href="../cv.html">CV</a>
+      <a href="../index.html#contact" class="hide-sm">Contact</a>
+      <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+    </nav>
+  </div>
+</div>
+
+
+<section class="hero project-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← All work</a>
+    <p class="project-meta">KTH EG2140 · 2025 · IEEE competition sponsored by Ørsted and rebase.energy</p>
+    <h1>Probabilistic renewable forecasting, East England</h1>
+    <p class="role">Day-ahead probabilistic forecasts of combined wind and solar output for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball loss.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">CatBoost</span><span class="tag">Random forest</span><span class="tag">Pinball loss</span></div>
+    
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <article class="prose"><h2 id="the-task">The task</h2>
+<p>An IEEE Power &amp; Energy Society competition, sponsored by Ørsted and rebase.energy: forecast
+the combined wind and solar generation of <strong>Hornsea 1</strong> — a 1.2 GW offshore wind farm 120 km
+off the Yorkshire coast — together with East England&rsquo;s solar capacity.</p>
+<p>Forecasts were day-ahead, for each half-hour period, submitted as <strong>quantiles in 10%
+increments from 10% to 90%</strong> and scored on pinball loss. Models were trained and tested on
+2020–2023 data, with the explicit aim of beating previous competitors&rsquo; results.</p>
+<h2 id="why-probabilistic">Why probabilistic</h2>
+<p>A point forecast of wind output answers the wrong question. If you are deciding how much
+reserve to hold, or what to bid, you need to know how wrong the forecast might be and in
+which direction. Pinball loss rewards exactly that: a model that is confident when it should
+be and uncertain when it should be.</p>
+<p>This was my first serious work with quantile forecasting, and the technique is the direct
+ancestor of what I now do professionally on imbalance volumes.</p>
+<h2 id="approach">Approach</h2>
+<p>Random forest regression, LightGBM and CatBoost, each trained on generation-site data, then
+combined into an <strong>ensemble producing a weighted combination of their predictions</strong>.
+Evaluated across several error measures in addition to the competition metric.</p>
+<p>The ensemble was the strongest model, which is the expected result but worth confirming
+empirically — it inherits each component&rsquo;s strengths and averages out their individual
+failure modes.</p>
+<h2 id="context">Context</h2>
+<p>Team project with Tilde Franzén and Victor Pettersson. Supervised by Xavier Weiss, with
+Sebastian Haglund as industry mentor.</p></article>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <span>Iraklis Bournazos — Stockholm</span>
+    <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

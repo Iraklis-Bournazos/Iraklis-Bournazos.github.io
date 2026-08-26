@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iraklis Bournazos — Energy forecasting &amp; power systems</title>
+<meta name="description" content="Electrical engineer working on forecasting for power systems and electricity markets. MSc Electric Power Engineering, KTH. Based in Stockholm.">
+<link rel="canonical" href="https://iraklis-bournazos.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Iraklis Bournazos — Energy forecasting &amp; power systems">
+<meta property="og:description" content="Electrical engineer working on forecasting for power systems and electricity markets. MSc Electric Power Engineering, KTH. Based in Stockholm.">
+<meta property="og:url" content="https://iraklis-bournazos.github.io/">
+<meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">Iraklis Bournazos</a>
+    <nav class="topnav">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#background" class="hide-sm">Background</a>
+      <a href="cv.html">CV</a>
+      <a href="index.html#contact" class="hide-sm">Contact</a>
+      <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+    </nav>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <img class="portrait" src="img/photo.jpg" alt="Iraklis Bournazos">
+      <div>
+        <p class="eyebrow">Stockholm, Sweden</p>
+        <h1>Iraklis Bournazos</h1>
+        <p class="role">Electrical engineer working on forecasting for power systems and electricity markets.</p>
+        <p>I have a five-year Diploma in Electrical and Computer Engineering from the <strong>National
+Technical University of Athens</strong> and an MSc in Electric Power Engineering from <strong>KTH</strong>,
+where I specialised in power system operation, planning and electricity markets.</p>
+<p>Most of my work sits between two fields: the statistical machinery of forecasting, and the
+physical and market realities of the grid being forecast. I have built net load forecasts
+covering 350 Norwegian municipalities, imbalance volume forecasts for the Swedish bidding
+zones, and a load controller that runs on a Raspberry Pi inside a water heater.</p>
+<p>I like problems where the answer has to survive contact with a real system — where a model
+that looks good in cross-validation still has to cope with missing meters, drifting
+behaviour and weather that refuses to repeat itself.</p>
+        <div class="status"><span class="dot"></span>Currently at <a href="https://www.rebase.energy/">rebase.energy</a> — open to roles from autumn 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I work on</h2>
+    <div class="focus"><div><h4>Forecasting under uncertainty</h4><p>Load, generation, prices and imbalance. Probabilistic output rather than point estimates —
+quantile regression, conformal calibration, and honest treatment of the tails, because in
+energy the extreme hours are usually the expensive ones.</p></div><div><h4>Energy data at scale</h4><p>Open metering, weather reanalysis and market data — Elhub, ENTSO-E, ERA5, Nord Pool.
+Pipelines built to survive real-world drift, gaps and non-stationarity rather than a clean
+benchmark dataset.</p></div><div><h4>Power systems engineering</h4><p>The domain underneath the models: system operation, market design, wind integration, grid
+connection and the techno-economics that decide what actually gets built.</p></div></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Selected work</h2>
+    
+    <a class="project" href="projects/norway-net-load.html">
+      <p class="project-meta">MSc thesis · rebase.energy &amp; KTH · 2026</p>
+      <h3>Municipal-scale net load forecasting for Norway</h3>
+      <p class="blurb">Day-ahead net load forecasts for 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most interesting result is a negative one.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">ERA5</span><span class="tag">GeoPandas</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/imbalance-volumes.html">
+      <p class="project-meta">rebase.energy · 2026</p>
+      <h3>Imbalance volume forecasting for the Swedish bidding zones</h3>
+      <p class="blurb">An end-to-end pipeline forecasting imbalance volumes across the Swedish bidding zones, with dedicated models per lead time and probabilistic output built for the tails.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Quantile regression</span><span class="tag">Conformal prediction</span><span class="tag">Time-series transformers</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/multicriteria-load-control.html">
+      <p class="project-meta">KTH EI2525 · 2025 · with Dio Randa Damara and Hadrien Guillaud</p>
+      <h3>Multicriteria load control for a domestic water heater</h3>
+      <p class="blurb">A plug-in box that decides when a household water heater should run. Forecasting, optimisation and real-time control in one loop, on real hardware.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Linear programming</span><span class="tag">Raspberry Pi 5</span><span class="tag">Arduino</span><span class="tag">SMHI · Nord Pool</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/east-england-forecasting.html">
+      <p class="project-meta">KTH EG2140 · 2025 · IEEE competition sponsored by Ørsted and rebase.energy</p>
+      <h3>Probabilistic renewable forecasting, East England</h3>
+      <p class="blurb">Day-ahead probabilistic forecasts of combined wind and solar output for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball loss.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">CatBoost</span><span class="tag">Random forest</span><span class="tag">Pinball loss</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/wind-farm-feasibility.html">
+      <p class="project-meta">KTH EG2340 · 2025 · team project</p>
+      <h3>Wind farm feasibility study, central Sweden</h3>
+      <p class="blurb">Technical and economic assessment of an 80 MW wind farm in a mountainous site in bidding zone SE3 — turbine selection through to battery sizing and LCOE.</p>
+      <div class="tags"><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">LCOE / NPV</span><span class="tag">BESS sizing</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/nitor-intraday-prices.html">
+      <p class="project-meta">Nitor Energy quantitative trading competition · 2026</p>
+      <h3>Intraday electricity price forecasting, six European markets</h3>
+      <p class="blurb">A competition solution for intraday price forecasting across six European markets, built around the part that actually drives the error: spikes.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Ensembles</span><span class="more">Read more →</span></div>
+    </a>
+  </div>
+</section>
+
+<section id="background">
+  <div class="wrap">
+    <h2>Background</h2>
+    
+    <div class="edu-item">
+      <div class="edu-when">Aug 2024 — Aug 2026</div>
+      <div>
+        <h3>MSc, Electric Power Engineering</h3>
+        <p class="where">KTH Royal Institute of Technology · Stockholm</p>
+        <p class="note">Power system analysis and operation, electricity market analysis, power system planning, wind power systems, communication and control in electric power systems, and machine learning applications in electric power systems. Degree project carried out at rebase.energy.</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-when">Dec 2018 — Apr 2024</div>
+      <div>
+        <h3>Diploma, Electrical and Computer Engineering</h3>
+        <p class="where">National Technical University of Athens · Athens</p>
+        <p class="note">Five-year integrated degree, 300 ECTS, major in energy. Thesis on wind turbine energy forecasting with machine learning and meta-learning methods, at the Electric Devices and Decision Systems Lab.</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-when">Sep 2021 — Apr 2024</div>
+      <div>
+        <h3>Minor, Leadership and Management</h3>
+        <p class="where">American College of Greece · Athens</p>
+        <p class="note">Taken alongside the NTUA diploma on a merit scholarship for academic excellence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-text"><p>I am always glad to talk about forecasting, electricity markets, or anything at the
+intersection of data and the grid — whether that is a role, a collaboration, or just an
+interesting problem.</p></div>
+    <div class="contact-row"><a class="btn primary" href="mailto:bournazosiraklis@gmail.com">Email me</a><a class="btn" href="https://www.linkedin.com/in/iraklis-bournazos">LinkedIn</a><a class="btn" href="https://github.com/Iraklis-Bournazos">GitHub</a></div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <span>Iraklis Bournazos — Stockholm</span>
+    <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

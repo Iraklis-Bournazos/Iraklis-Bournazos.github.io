@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multicriteria load control for a domestic water heater — Iraklis Bournazos</title>
+<meta name="description" content="A plug-in box that decides when a household water heater should run. Forecasting, optimisation and real-time control in one loop, on real hardware.
+">
+<link rel="canonical" href="https://iraklis-bournazos.github.io/projects/multicriteria-load-control.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Multicriteria load control for a domestic water heater — Iraklis Bournazos">
+<meta property="og:description" content="A plug-in box that decides when a household water heater should run. Forecasting, optimisation and real-time control in one loop, on real hardware.
+">
+<meta property="og:url" content="https://iraklis-bournazos.github.io/projects/multicriteria-load-control.html">
+<meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Iraklis Bournazos</a>
+    <nav class="topnav">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#background" class="hide-sm">Background</a>
+      <a href="../cv.html">CV</a>
+      <a href="../index.html#contact" class="hide-sm">Contact</a>
+      <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+    </nav>
+  </div>
+</div>
+
+
+<section class="hero project-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← All work</a>
+    <p class="project-meta">KTH EI2525 · 2025 · with Dio Randa Damara and Hadrien Guillaud</p>
+    <h1>Multicriteria load control for a domestic water heater</h1>
+    <p class="role">A plug-in box that decides when a household water heater should run. Forecasting, optimisation and real-time control in one loop, on real hardware.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">Linear programming</span><span class="tag">Raspberry Pi 5</span><span class="tag">Arduino</span><span class="tag">SMHI · Nord Pool</span></div>
+    <div class="contact-row"><a class="btn" href="https://github.com/Iraklis-Bournazos/multicriteria-load-control">Code on GitHub</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <article class="prose"><h2 id="the-opportunity">The opportunity</h2>
+<p>A domestic water heater is close to an ideal flexibility resource. The tank is thermal
+storage: heat the water early and it is still hot later. Nobody notices <em>when</em> the heating
+happened, only whether there is hot water when they want it.</p>
+<p>Two things made this worth building in 2025. Nord Pool day-ahead prices moved from hourly to
+quarter-hourly resolution on 1 October, and many Swedish network operators now apply
+power-based tariffs that penalise monthly peaks. Meanwhile compensation for exporting PV
+energy to the grid is modest. Shifting heating into cheap or high-PV periods is therefore
+worth real money — provided something is actually making that decision.</p>
+<h2 id="the-three-layers">The three layers</h2>
+<p><strong>Long-term screening</strong> looks several days ahead for favourable conditions — low spot prices
+and high expected PV — to inform strategic pre-heating.</p>
+<p><strong>Day-ahead optimisation</strong> is a linear program computing a 24-hour schedule. The tank is
+modelled as finite thermal storage with standing losses and a 1 kW power cap. The objective
+trades grid cost against PV self-consumption, subject to comfort constraints that keep the
+tank state of charge inside its bounds at all times, so hot-water availability is never
+sacrificed to save money.</p>
+<p><strong>Real-time supervision</strong> runs every ten seconds against live smart-meter data over the home
+area network. When it detects unexpected solar surplus in the export measurement, it boosts
+heater power to absorb it rather than exporting at a poor price; it then reduces heating
+during expensive periods later to stay within the daily energy budget. This is what handles
+the gap between the forecast and what the day actually did.</p>
+<h2 id="the-hardware">The hardware</h2>
+<p>A prototype built on a Raspberry Pi 5 running the optimisation and supervision, an Arduino
+microcontroller driving a <strong>triac power stage</strong> with a <strong>zero-crossing detector</strong> for
+duty-cycle modulation of the resistive load. Price data from Nord Pool, weather and PV
+forecasts from SMHI, live consumption and export from the smart meter&rsquo;s HAN interface.</p>
+<p>The honest status at hand-in: the software chain was working and simulations showed reduced
+grid cost and higher PV utilisation with the tank always inside its comfort bounds, but the
+hardware still needed full laboratory testing to confirm the duty-cycle modulation approach.</p>
+<h2 id="why-i-like-this-one">Why I like this one</h2>
+<p>Most student projects stop at the simulation. This one had to close the loop: a forecast
+feeds an optimiser, the optimiser produces a schedule, the schedule drives a triac, and the
+triac heats actual water — and then reality diverges from the forecast and something has to
+notice and react. Every layer had to be correct for the last one to work.</p>
+<p>Supervised by Nathaniel Taylor and examined by Lina Bertling Tjernberg.</p></article>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <span>Iraklis Bournazos — Stockholm</span>
+    <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

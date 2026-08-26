@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imbalance volume forecasting for the Swedish bidding zones — Iraklis Bournazos</title>
+<meta name="description" content="An end-to-end pipeline forecasting imbalance volumes across the Swedish bidding zones, with dedicated models per lead time and probabilistic output bu">
+<link rel="canonical" href="https://iraklis-bournazos.github.io/projects/imbalance-volumes.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Imbalance volume forecasting for the Swedish bidding zones — Iraklis Bournazos">
+<meta property="og:description" content="An end-to-end pipeline forecasting imbalance volumes across the Swedish bidding zones, with dedicated models per lead time and probabilistic output bu">
+<meta property="og:url" content="https://iraklis-bournazos.github.io/projects/imbalance-volumes.html">
+<meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Iraklis Bournazos</a>
+    <nav class="topnav">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#background" class="hide-sm">Background</a>
+      <a href="../cv.html">CV</a>
+      <a href="../index.html#contact" class="hide-sm">Contact</a>
+      <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+    </nav>
+  </div>
+</div>
+
+
+<section class="hero project-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← All work</a>
+    <p class="project-meta">rebase.energy · 2026</p>
+    <h1>Imbalance volume forecasting for the Swedish bidding zones</h1>
+    <p class="role">An end-to-end pipeline forecasting imbalance volumes across the Swedish bidding zones, with dedicated models per lead time and probabilistic output built for the tails.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">Quantile regression</span><span class="tag">Conformal prediction</span><span class="tag">Time-series transformers</span></div>
+    
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <article class="prose"><h2 id="why-imbalance-is-a-different-problem">Why imbalance is a different problem</h2>
+<p>System imbalance is not load. It is the residual of everything that did not go according to
+plan — forecast error, outages, market behaviour — and it is dominated by the hours when
+something unusual happened. A model tuned to minimise average error will be excellent on the
+quiet hours that nobody cares about and useless on the ones that cost money.</p>
+<p>That shapes every decision in the pipeline.</p>
+<h2 id="structure">Structure</h2>
+<p>The pipeline forecasts imbalance volumes across the Swedish bidding zones with <strong>dedicated
+models per lead time</strong> rather than one model asked to cover every horizon. What is knowable
+about hour <em>h+1</em> is not what is knowable about hour <em>h+36</em>, and collapsing those into a
+single model quietly wastes information at short horizons.</p>
+<p>The whole thing is built to be <strong>leakage-free</strong>: at every horizon, the model sees only what
+would genuinely have been available at that moment. This is less trivial than it sounds when
+market data, forecasts and settlement values all arrive on different schedules.</p>
+<h2 id="probabilistic-output">Probabilistic output</h2>
+<p>The output is a distribution, not a number:</p>
+<ul>
+<li><strong>Quantile regression</strong> for the shape of the distribution</li>
+<li><strong>Conformal calibration</strong> so the intervals mean what they claim to mean</li>
+<li><strong>Tail-exceedance spike detection</strong> for the extreme hours specifically</li>
+<li><strong>Directional probabilities</strong> — the probability that the system is long or short, which is
+  often the decision-relevant quantity rather than the magnitude</li>
+</ul>
+<h2 id="feature-selection">Feature selection</h2>
+<p>Feature selection uses a <strong>Boruta-style shadow-feature pipeline</strong>: real features must
+outperform randomised copies of themselves to survive. Alongside that, per-horizon
+correlation studies across numerical weather prediction models, intraday market data and
+day-ahead market data, since which sources matter changes substantially with lead time.</p>
+<p>I also implemented <strong>transformer time-series foundation models</strong> as an input generator,
+using their outputs as features to improve short-term accuracy.</p>
+<h2 id="note">Note</h2>
+<p>This is internal work at <a href="https://www.rebase.energy/">rebase.energy</a> and the code is not
+public. I am happy to talk about the approach in general terms.</p></article>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <span>Iraklis Bournazos — Stockholm</span>
+    <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

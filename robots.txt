@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iraklis-bournazos.github.io/sitemap.xml
