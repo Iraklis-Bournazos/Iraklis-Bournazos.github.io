@@ -1,16 +1,11 @@
-## Forecasting under uncertainty
+## Power Systems & Energy Engineering
 
-Load, generation, prices and imbalance. Probabilistic output rather than point estimates —
-quantile regression, conformal calibration, and honest treatment of the tails, because in
-energy the extreme hours are usually the expensive ones.
+Focus: renewable energy systems, power system analysis, energy storage, integration of distributed energy resources, electricity markets and regulation, smart grids, electromobility, and resilient power systems.
 
-## Energy data at scale
+My background spans multiple layers of the energy system — from power electronics, electrical machines and drives to system-level analysis, electricity markets, forecasting and optimization.
 
-Open metering, weather reanalysis and market data — Elhub, ENTSO-E, ERA5, Nord Pool.
-Pipelines built to survive real-world drift, gaps and non-stationarity rather than a clean
-benchmark dataset.
+## Data-driven Modeling, Machine Learning & Optimization
 
-## Power systems engineering
+Focus: applying machine learning, optimization and computational methods to complex engineering and energy-system problems.
 
-The domain underneath the models: system operation, market design, wind integration, grid
-connection and the techno-economics that decide what actually gets built.
+Experience with end-to-end forecasting and modeling workflows, including feature engineering, gradient-boosting models, probabilistic and quantile forecasting, conformal calibration, time-series validation, and model evaluation. I also work with mathematical optimization and simulation methods, including linear programming, stochastic approaches and Monte Carlo methods.

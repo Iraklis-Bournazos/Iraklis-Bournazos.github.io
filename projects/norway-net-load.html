@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Municipal-scale net load forecasting for Norway — Iraklis Bournazos</title>
-<meta name="description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful ">
+<meta name="description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment.
+">
 <link rel="canonical" href="https://iraklis-bournazos.github.io/projects/norway-net-load.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Municipal-scale net load forecasting for Norway — Iraklis Bournazos">
-<meta property="og:description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful ">
+<meta property="og:description" content="Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment.
+">
 <meta property="og:url" content="https://iraklis-bournazos.github.io/projects/norway-net-load.html">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -16,6 +18,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
@@ -28,6 +40,17 @@
       <a href="../cv.html">CV</a>
       <a href="../index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -38,7 +61,7 @@
     <a class="back" href="../index.html#work">← All work</a>
     <p class="project-meta">MSc thesis · rebase.energy &amp; KTH · 2026</p>
     <h1>Municipal-scale net load forecasting for Norway</h1>
-    <p class="role">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful result is a negative one.</p>
+    <p class="role">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment.</p>
     <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">ERA5</span><span class="tag">GeoPandas</span></div>
     <div class="contact-row"><a class="btn primary" href="../files/projects/msc-thesis-net-load-forecasting-norway.pdf">Read the full report (PDF)</a><a class="btn" href="https://github.com/Iraklis-Bournazos/norway-net-load-forecasting">Code on GitHub</a></div>
   </div>
@@ -47,81 +70,43 @@
 <section>
   <div class="wrap">
     <article class="prose"><h2 id="the-problem">The problem</h2>
-<p>Distribution system operators, traders and flexibility providers all need to know what
-tomorrow&rsquo;s load looks like at the grid boundary. That boundary is moving. Norway&rsquo;s
-<em>Plusskunde</em> net-metering scheme lets households with installations up to 100 kW export
-surplus generation, and rooftop solar has spread quickly.</p>
-<p>The consequence is the <strong>behind-the-meter invisibility problem</strong>. What a DSO measures is
-net load — gross consumption minus whatever the roof produced and the household consumed
-on site. Self-consumed solar never crosses any metering point the operator owns, so it is
-structurally unobservable from the operator&rsquo;s own data. The DSO sees only the difference
-and cannot decompose it.</p>
-<p>My question: can you forecast that net load, at municipal resolution, across an entire
-country, using nothing but public data?</p>
-<h2 id="the-data">The data</h2>
-<p>Elhub publishes hourly AMI metering for Norway, already split by consumer category —
-private residential, commercial and industrial — along with solar export records and daily
-installed-capacity snapshots. Weather comes from ERA5 reanalysis, matched to each
-municipality by a weather-station selection procedure that picks the most representative
-grid cell. No proprietary data anywhere, so the results are reproducible.</p>
-<h2 id="three-stages-not-one-model">Three stages, not one model</h2>
+<p>What a DSO measures at the grid boundary is net load — consumption minus behind-the-meter
+generation consumed on site. Self-consumed solar never crosses a metering point the operator
+owns, so it is structurally unobservable. Norway&rsquo;s <em>Plusskunde</em> scheme, which lets households
+export from installations up to 100 kW, has made this grow quickly.</p>
+<p><strong>Main question:</strong> how efficiently can net load be forecast at municipal resolution, across
+an entire country, using nothing but public data?</p>
+<h2 id="data">Data</h2>
+<p>Elhub hourly AMI metering, already split into private residential, commercial and industrial,
+with solar export records and daily installed-capacity snapshots. ERA5 reanalysis weather,
+matched to each municipality by a weather-station selection algorithm.</p>
+<h2 id="framework">Framework</h2>
 <ol>
-<li><strong>National weather feature ablation</strong> across all 350 municipalities, to find which
-   weather variables actually earn their place.</li>
-<li><strong>Six-fold expanding-window walk-forward evaluation</strong> on eight municipalities chosen to
-   span the full solar-penetration spectrum, comparing several model formulations.</li>
-<li><strong>Three-fold national validation</strong> over the unseen 2025 calendar year.</li>
+<li><strong>National weather feature ablation</strong> across all 350 municipalities</li>
+<li><strong>Six-fold expanding-window walk-forward evaluation</strong> on eight municipalities spanning the
+   solar-penetration spectrum</li>
+<li><strong>Three-fold national validation</strong> on the unseen 2025 calendar year</li>
 </ol>
-<p>Forecasting runs per consumer segment, because the three segments turn out to be different
-problems rather than three instances of one.</p>
-<h2 id="what-the-results-say">What the results say</h2>
-<p>Temperature dominates everything. The ablation puts its contribution at <strong>+5.74 percentage
-points</strong> of MAPE reduction for residential load, +4.21 pp for commercial and +2.00 pp for
-industrial.</p>
-<p>The weather-based LightGBM model became the national default. For residential net load it
-reaches a mean annual municipality MAPE of <strong>6.69%</strong>, beating the seasonal naive benchmark
-in <strong>347 of 350 municipalities</strong> and the best linear-regression baseline in 246 of 350.
-Commercial load reaches 9.66% MAPE, winning in 313 of 350 against naive.</p>
-<p>The linear baseline is not merely worse — it <em>collapses</em> on industrial load, at 63.3%
-annual mean MAPE. That is the cleanest evidence in the thesis that the non-linear
-architecture is a structural necessity here rather than a fashionable choice.</p>
-<h2 id="the-negative-result-which-is-the-useful-one">The negative result, which is the useful one</h2>
-<p>The prosumer-aware model — the one given solar capacity and export features — produced no
-systematic national improvement. Its mean gain was <strong>−0.03 pp</strong> across 350 municipalities.
-No penetration tier showed a robust win.</p>
-<p>The obvious conclusion is that the model is inadequate. A controlled synthetic experiment
-says otherwise: given exact, noiseless capacity information, the same architecture improves
-consistently across every growth scenario and every fold, by <strong>+0.16 to +0.37 pp</strong>.</p>
-<p>So the architecture is sound and the failure is in the data. Three causes, all structural:
-behind-the-meter invisibility, solar penetration that is still low, and contamination in the
-registry itself — Elhub&rsquo;s E19 metering category pools residential, commercial, agricultural
-and industrial generation together, each with different self-consumption ratios and diurnal
-profiles, so using it as a residential-solar proxy imports noise that cannot be removed
-without disaggregating the registry.</p>
-<p><strong>This matters for anyone deciding where to spend money.</strong> If a DSO is choosing between
-better forecasting models and better visibility of distributed generation, this says: fix
-the visibility first. The models are already ahead of the data.</p>
-<p>The operational answer under current conditions is a conservative portfolio: deploy the
-prosumer-aware model only in the 48 municipalities (13.7%) where it improves consistently
-across every fold, and the weather-based model everywhere else. That never underperforms
-the weather-based model anywhere in the portfolio.</p>
-<h2 id="industrial-load-is-a-different-problem">Industrial load is a different problem</h2>
-<p>Norwegian industrial consumption concentrates in large energy-intensive facilities running
-on production schedules that have little to do with weather or calendars. Weather-and-calendar
-features reach their generalisation limit, and the win rate against naive sits near 50%.
-The recommendation is a two-category hybrid — seasonal naive for continuous-process
-municipalities, and the weather model with spot-price features for heterogeneous urban ones.</p>
-<h2 id="being-honest-about-the-ceiling">Being honest about the ceiling</h2>
-<p>The reported accuracy is an <strong>upper bound</strong>, not an operational figure. Weather features come
-from ERA5 reanalysis — historically observed conditions, not forecasts. In production, NWP
-forecast error would degrade this. ERA5&rsquo;s ~31 km grid also cannot resolve sub-municipal
-variation, so municipalities where the load centre sits away from the assigned cell — fjord
-microclimates, elevation differences, spatially concentrated industry — carry a systematic
-mismatch.</p>
-<h2 id="context">Context</h2>
-<p>Carried out at <a href="https://www.rebase.energy/">rebase.energy</a> as my KTH degree project.
-Supervisors: Valgerður Jónsdóttir, Ilias Dimoulkas and Sebastian Haglund. Examiner: Lars
-Nordström.</p></article>
+<p>Forecasting runs per consumer segment, because the three behave as different problems.</p>
+<h2 id="results">Results</h2>
+<p>The weather-based LightGBM model became the national default. Residential net load reaches a
+mean annual municipality MAPE of <strong>6.69%</strong>, beating the benchmark in <strong>347 of 350
+municipalities</strong> and the linear-regression baseline in 246 of 350. Commercial reaches 9.66%,
+winning in 313 of 350.</p>
+<p>Industrial is structurally different: production schedules are uncorrelated with weather and
+calendar, and the win rate sits near 50%. The recommendation is a two-category hybrid.</p>
+<h2 id="the-synthetic-experiment">The synthetic experiment</h2>
+<p>The prosumer-aware model — given solar capacity and export features — produced <strong>no</strong>
+systematic national improvement: mean gain −0.03 pp across 350 municipalities.</p>
+<p>A controlled synthetic experiment isolates why. Given exact, noiseless capacity information,
+the same architecture improves consistently across every growth scenario and fold, by
+<strong>+0.16 to +0.37 pp</strong>. The architecture is sound; the limit is in the data — behind-the-meter
+invisibility, low penetration, and contamination in the registry, since Elhub&rsquo;s E19 category
+pools residential, commercial, agricultural and industrial generation together.</p>
+<p>The operational answer is a conservative portfolio: deploy the prosumer-aware model only in
+the 48 municipalities (13.7%) where it improves across every fold, and the weather-based
+model elsewhere. For a DSO choosing between better models and better visibility of
+distributed generation, this says: fix the visibility first.</p></article>
   </div>
 </section>
 
@@ -132,6 +117,24 @@ Nordström.</p></article>
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

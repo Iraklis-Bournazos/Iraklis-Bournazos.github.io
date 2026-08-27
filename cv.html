@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV — Iraklis Bournazos</title>
-<meta name="description" content="Electrical engineer — energy forecasting and power systems">
+<meta name="description" content="Electrical &amp; Computer Engineer — Electric Power Engineer">
 <link rel="canonical" href="https://iraklis-bournazos.github.io/cv.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CV — Iraklis Bournazos">
-<meta property="og:description" content="Electrical engineer — energy forecasting and power systems">
+<meta property="og:description" content="Electrical &amp; Computer Engineer — Electric Power Engineer">
 <meta property="og:url" content="https://iraklis-bournazos.github.io/cv.html">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -16,6 +16,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body class="cv-page">
 
@@ -28,6 +38,17 @@
       <a href="cv.html">CV</a>
       <a href="index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -44,7 +65,7 @@
     <img class="cv-photo" src="img/photo.jpg" alt="">
     <div class="cv-id">
       <h1>Iraklis Bournazos</h1>
-      <p class="cv-tagline">Electrical engineer — energy forecasting and power systems</p>
+      <p class="cv-tagline">Electrical &amp; Computer Engineer — Electric Power Engineer</p>
       <p class="cv-contact">
         Stockholm, Sweden &nbsp;·&nbsp; +46 70 498 45 95 &nbsp;·&nbsp;
         <a href="mailto:bournazosiraklis@gmail.com">bournazosiraklis@gmail.com</a><br>
@@ -58,7 +79,7 @@
     </div>
   </header>
 
-  <p class="cv-summary">Electrical and computer engineer with an MSc in Electric Power Engineering from KTH, specialising in power system operation, planning and electricity markets. I build forecasting systems for net load, renewable generation, prices and imbalance — and I am equally at home in the power system engineering underneath them.</p>
+  <p class="cv-summary">Electrical and computer engineer with an MSc in Electric Power Engineering from KTH, specialising in power system operation, control, planning, electricity markets and modern computational methods in energy systems.</p>
 
   <section class="cv-section"><h2>Experience</h2>
       <div class="cv-entry">
@@ -66,7 +87,7 @@
         <div class="cv-body">
           <h3>Data Scientist Intern <span class="at">·</span> rebase.energy</h3>
           <p class="cv-sub">Stockholm, Sweden</p>
-          <ul><li>Built an end-to-end, leakage-free imbalance volume forecasting pipeline for the Swedish bidding zones, with dedicated models for each forecast lead time.</li><li>Produced probabilistic forecasts using quantile regression with conformal calibration, adding tail-exceedance spike detection and directional probabilities of system imbalance.</li><li>Designed a Boruta-style shadow-feature importance pipeline and per-horizon correlation studies across weather prediction models and intraday and day-ahead market data, and implemented transformer time-series foundation models as an input generator for short-term accuracy.</li></ul>
+          <ul><li>Built an end-to-end, leakage-free imbalance volume forecasting pipeline for the Swedish bidding zones, with dedicated models for each forecast lead time.</li><li>Produced probabilistic forecasts using quantile regression with conformal calibration, adding tail-exceedance spike detection and directional probabilities of system imbalance.</li><li>Designed a Boruta-style shadow-feature importance pipeline and per-horizon correlation studies across weather prediction models, intraday and day-ahead market data, and implemented transformer time-series foundation models as an input generator for short-term accuracy.</li></ul>
           
         </div>
       </div>
@@ -75,7 +96,7 @@
         <div class="cv-body">
           <h3>MSc Thesis Project <span class="at">·</span> rebase.energy</h3>
           <p class="cv-sub">Stockholm, Sweden</p>
-          <ul><li>Designed and implemented a modular end-to-end machine learning framework for day-ahead net load forecasting across 350 Norwegian municipalities, using LightGBM, CatBoost, XGBoost and ensemble modelling on open Elhub AMI metering data and ERA5 weather reanalysis.</li><li>Disaggregated forecasting by consumer segment — residential, commercial and industrial — and showed that industrial net load is a structurally different problem requiring a hybrid deployment strategy.</li><li>Investigated behind-the-meter solar PV penetration and grid observability, and established through a controlled synthetic experiment that the limiting factor is data visibility rather than model architecture.</li><li>Built the preprocessing and feature pipelines, with residual analysis, bias correction and drift handling for robustness under changing conditions.</li></ul>
+          <ul><li>Designed and implemented a modular end-to-end machine learning framework for day-ahead net load forecasting across 350 Norwegian municipalities, using LightGBM, CatBoost, XGBoost and ensemble modelling on open Elhub AMI metering data and ERA5 weather reanalysis.</li><li>Disaggregated forecasting by consumer segment — residential, commercial and industrial — and showed that industrial net load is a structurally different problem requiring a hybrid deployment strategy.</li><li>Investigated behind-the-meter solar PV penetration and grid observability, and established through a controlled synthetic experiment.</li><li>Built the preprocessing and feature pipelines, with residual analysis, bias correction and drift handling for robustness under changing conditions.</li></ul>
           
         </div>
       </div>
@@ -99,12 +120,12 @@
       </div></section>
   <section class="cv-section"><h2>Education</h2>
       <div class="cv-entry">
-        <div class="cv-when">Aug 2024 — Aug 2026</div>
+        <div class="cv-when">Aug 2024 — Jun 2026</div>
         <div class="cv-body">
           <h3>MSc, Electric Power Engineering</h3>
           <p class="cv-sub">KTH Royal Institute of Technology · Stockholm, Sweden</p>
           
-          <ul class="tight"><li>Two-year degree, 120 ECTS. Specialisation: power system operation, planning, control and electricity markets.</li><li>Degree project: A Municipal-Scale Net Load Forecasting Framework for Norway, carried out at rebase.energy.</li></ul>
+          <ul class="tight"><li>Two-year degree, 120 ECTS.</li><li>Degree project: A Municipal-Scale Net Load Forecasting Framework for Norway, carried out at rebase.energy.</li></ul>
         </div>
       </div>
       <div class="cv-entry">
@@ -131,15 +152,15 @@
         <div class="cv-body">
           <h3>Multicriteria Load Control — price-responsive water heater controller</h3>
           <p class="cv-sub">KTH EI2525, Electric Power Engineering Project</p>
-          <p class="cv-text">Linear-programming scheduler running a domestic water heater against spot prices and PV forecasts, with a real-time supervisory loop on live smart-meter data. Raspberry Pi 5, Arduino triac stage, zero-crossing detector.</p>
+          <p class="cv-text">Built a prototype device for an optimization scheduler running a domestic water heater against spot prices and PV forecasts, with a real-time supervisory loop on live smart-meter data. Raspberry Pi 5, Arduino triac stage, zero-crossing detector.</p>
         </div>
       </div>
       <div class="cv-entry">
         <div class="cv-when">2025</div>
         <div class="cv-body">
           <h3>Probabilistic renewable generation forecasting, East England</h3>
-          <p class="cv-sub">KTH EG2140 — IEEE competition sponsored by Ørsted and rebase.energy</p>
-          <p class="cv-text">Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball loss. Random forest, LightGBM and CatBoost ensemble.</p>
+          <p class="cv-sub">KTH EG2140</p>
+          <p class="cv-text">Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, submitted as quantiles and scored on pinball loss. Random forest, LightGBM and CatBoost ensemble modelling.</p>
         </div>
       </div>
       <div class="cv-entry">
@@ -147,7 +168,7 @@
         <div class="cv-body">
           <h3>Wind farm feasibility and techno-economic study, bidding zone SE3</h3>
           <p class="cv-sub">KTH EG2340, Wind Power Systems</p>
-          <p class="cv-text">80 MW wind farm in central Sweden — turbine selection, layout and electrical topology, grid connection costing, LCOE and NPV across an investment range, BESS sizing on SE3 prices.</p>
+          <p class="cv-text">80 MW wind farm feasibility study in central Sweden — turbine selection, layout and electrical topology, grid connection costing, LCOE and NPV across an investment range, BESS optimization and sizing.</p>
         </div>
       </div>
       <div class="cv-entry">
@@ -174,6 +195,24 @@
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

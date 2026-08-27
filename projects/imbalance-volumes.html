@@ -16,6 +16,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
@@ -28,6 +38,17 @@
       <a href="../cv.html">CV</a>
       <a href="../index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -46,36 +67,31 @@
 
 <section>
   <div class="wrap">
-    <article class="prose"><h2 id="why-imbalance-is-a-different-problem">Why imbalance is a different problem</h2>
-<p>System imbalance is not load. It is the residual of everything that did not go according to
-plan — forecast error, outages, market behaviour — and it is dominated by the hours when
-something unusual happened. A model tuned to minimise average error will be excellent on the
-quiet hours that nobody cares about and useless on the ones that cost money.</p>
-<p>That shapes every decision in the pipeline.</p>
-<h2 id="structure">Structure</h2>
-<p>The pipeline forecasts imbalance volumes across the Swedish bidding zones with <strong>dedicated
-models per lead time</strong> rather than one model asked to cover every horizon. What is knowable
-about hour <em>h+1</em> is not what is knowable about hour <em>h+36</em>, and collapsing those into a
-single model quietly wastes information at short horizons.</p>
-<p>The whole thing is built to be <strong>leakage-free</strong>: at every horizon, the model sees only what
-would genuinely have been available at that moment. This is less trivial than it sounds when
-market data, forecasts and settlement values all arrive on different schedules.</p>
-<h2 id="probabilistic-output">Probabilistic output</h2>
-<p>The output is a distribution, not a number:</p>
+    <article class="prose"><h2 id="scope">Scope</h2>
+<p>Forecasting the 15-minute system imbalance volume in SE3, from 15 minutes up to 12 hours ahead, using probabilistic machine-learning models built around the information that would actually have been available at each prediction time.</p>
+<p>The target is the signed balancing volume activated by the TSO: positive values indicate a short system requiring up-regulation, while negative values indicate a long system requiring down-regulation.</p>
+<h2 id="modelling-approach">Modelling approach</h2>
+<p>I built 15 independent single-horizon XGBoost models, one for each lead time from 15 minutes to 12 hours. Each horizon has its own feature set because the useful information changes substantially with lead time. Also a pooled strategy was tested and evaluated.</p>
+<p>The pipeline was designed to be fully leakage-safe. Measured quantities, forecasts and market data were shifted according to their real publication delays, so every model only sees information that would genuinely have existed at issue time.</p>
+<h2 id="probabilistic-forecasts">Probabilistic forecasts</h2>
+<p>For each horizon it produces:</p>
 <ul>
 <li><strong>Quantile regression</strong> for the shape of the distribution</li>
 <li><strong>Conformal calibration</strong> so the intervals mean what they claim to mean</li>
 <li><strong>Tail-exceedance spike detection</strong> for the extreme hours specifically</li>
 <li><strong>Directional probabilities</strong> — the probability that the system is long or short, which is
   often the decision-relevant quantity rather than the magnitude</li>
+<li><strong>SHAP</strong>-based feature attributions</li>
 </ul>
-<h2 id="feature-selection">Feature selection</h2>
+<p>This makes the forecast useful for both expected imbalance magnitude and risk around extreme or directional outcomes.</p>
+<h2 id="feature-engineering-and-selection">Feature engineering and selection</h2>
+<p>The project combined 4,800+ candidate features from grid, market, weather and forecast data. Sources included ENTSO-E, Nord Pool, JAO, Rebase grid and weather data, together with internally generated driver forecasts.</p>
 <p>Feature selection uses a <strong>Boruta-style shadow-feature pipeline</strong>: real features must
-outperform randomised copies of themselves to survive. Alongside that, per-horizon
-correlation studies across numerical weather prediction models, intraday market data and
-day-ahead market data, since which sources matter changes substantially with lead time.</p>
+outperform randomised copies of themselves to survive. Alongside that, extensive per-horizon
+correlation analysis between every candidate input and the target, across numerical weather
+prediction models and intraday and day-ahead market data.</p>
 <p>I also implemented <strong>transformer time-series foundation models</strong> as an input generator,
-using their outputs as features to improve short-term accuracy.</p>
+using their outputs as features to improve short-term accuracy in different lead times of forecasting.</p>
 <h2 id="note">Note</h2>
 <p>This is internal work at <a href="https://www.rebase.energy/">rebase.energy</a> and the code is not
 public. I am happy to talk about the approach in general terms.</p></article>
@@ -89,6 +105,24 @@ public. I am happy to talk about the approach in general terms.</p></article>
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

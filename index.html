@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Iraklis Bournazos — Energy forecasting &amp; power systems</title>
-<meta name="description" content="Electrical engineer working on forecasting for power systems and electricity markets. MSc Electric Power Engineering, KTH. Based in Stockholm.">
+<title>Iraklis Bournazos — Electrical &amp; Computer Engineer NTUA — Electric Power Engineer KTH</title>
+<meta name="description" content="Electrical engineer working in power systems, forecasting, machine learning applications in energy systems. MSc Electric Power Engineering, KTH. Based in Stockholm.">
 <link rel="canonical" href="https://iraklis-bournazos.github.io/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Iraklis Bournazos — Energy forecasting &amp; power systems">
-<meta property="og:description" content="Electrical engineer working on forecasting for power systems and electricity markets. MSc Electric Power Engineering, KTH. Based in Stockholm.">
+<meta property="og:title" content="Iraklis Bournazos — Electrical &amp; Computer Engineer NTUA — Electric Power Engineer KTH">
+<meta property="og:description" content="Electrical engineer working in power systems, forecasting, machine learning applications in energy systems. MSc Electric Power Engineering, KTH. Based in Stockholm.">
 <meta property="og:url" content="https://iraklis-bournazos.github.io/">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
@@ -16,6 +16,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
@@ -28,6 +38,17 @@
       <a href="cv.html">CV</a>
       <a href="index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -40,18 +61,11 @@
       <div>
         <p class="eyebrow">Stockholm, Sweden</p>
         <h1>Iraklis Bournazos</h1>
-        <p class="role">Electrical engineer working on forecasting for power systems and electricity markets.</p>
+        
         <p>I have a five-year Diploma in Electrical and Computer Engineering from the <strong>National
-Technical University of Athens</strong> and an MSc in Electric Power Engineering from <strong>KTH</strong>,
-where I specialised in power system operation, planning and electricity markets.</p>
-<p>Most of my work sits between two fields: the statistical machinery of forecasting, and the
-physical and market realities of the grid being forecast. I have built net load forecasts
-covering 350 Norwegian municipalities, imbalance volume forecasts for the Swedish bidding
-zones, and a load controller that runs on a Raspberry Pi inside a water heater.</p>
-<p>I like problems where the answer has to survive contact with a real system — where a model
-that looks good in cross-validation still has to cope with missing meters, drifting
-behaviour and weather that refuses to repeat itself.</p>
-        <div class="status"><span class="dot"></span>Currently at <a href="https://www.rebase.energy/">rebase.energy</a> — open to roles from autumn 2026</div>
+Technical University of Athens</strong> and an MSc in Electric Power Engineering from <strong>KTH</strong>.</p>
+<p>I am a power systems engineer combining deep energy-domain expertise with machine learning, forecasting and optimization. I work on problems at the intersection of the physical power system, electricity markets and data — from renewable integration and system operation to probabilistic forecasting and data-driven methods. What interests me most is turning complex energy-system behaviour into models and tools that are technically rigorous and deployable.</p>
+        
       </div>
     </div>
   </div>
@@ -60,12 +74,7 @@ behaviour and weather that refuses to repeat itself.</p>
 <section>
   <div class="wrap">
     <h2>What I work on</h2>
-    <div class="focus"><div><h4>Forecasting under uncertainty</h4><p>Load, generation, prices and imbalance. Probabilistic output rather than point estimates —
-quantile regression, conformal calibration, and honest treatment of the tails, because in
-energy the extreme hours are usually the expensive ones.</p></div><div><h4>Energy data at scale</h4><p>Open metering, weather reanalysis and market data — Elhub, ENTSO-E, ERA5, Nord Pool.
-Pipelines built to survive real-world drift, gaps and non-stationarity rather than a clean
-benchmark dataset.</p></div><div><h4>Power systems engineering</h4><p>The domain underneath the models: system operation, market design, wind integration, grid
-connection and the techno-economics that decide what actually gets built.</p></div></div>
+    <div class="focus"><div class="focus-card"><div class="focus-head"><span class="focus-num">01</span><h4>Power Systems &amp; Energy Engineering</h4></div><div class="focus-main"><ul class="chips"><li>renewable energy systems</li><li>power system analysis</li><li>energy storage</li><li>integration of distributed energy resources</li><li>electricity markets and regulation</li><li>smart grids</li><li>electromobility</li><li>resilient power systems</li></ul><div class="focus-body"><p>My background spans multiple layers of the energy system — from power electronics, electrical machines and drives to system-level analysis, electricity markets, forecasting and optimization.</p></div></div></div><div class="focus-card"><div class="focus-head"><span class="focus-num">02</span><h4>Data-driven Modeling, Machine Learning &amp; Optimization</h4></div><div class="focus-main"><p class="focus-lede">applying machine learning, optimization and computational methods to complex engineering and energy-system problems</p><div class="focus-body"><p>Experience with end-to-end forecasting and modeling workflows, including feature engineering, gradient-boosting models, probabilistic and quantile forecasting, conformal calibration, time-series validation, and model evaluation. I also work with mathematical optimization and simulation methods, including linear programming, stochastic approaches and Monte Carlo methods.</p></div></div></div></div>
   </div>
 </section>
 
@@ -76,7 +85,7 @@ connection and the techno-economics that decide what actually gets built.</p></d
     <a class="project" href="projects/norway-net-load.html">
       <p class="project-meta">MSc thesis · rebase.energy &amp; KTH · 2026</p>
       <h3>Municipal-scale net load forecasting for Norway</h3>
-      <p class="blurb">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment and built entirely on open data. The most useful result is a negative one.</p>
+      <p class="blurb">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">ERA5</span><span class="tag">GeoPandas</span><span class="more">Read more →</span></div>
     </a>
     <a class="project" href="projects/imbalance-volumes.html">
@@ -86,13 +95,13 @@ connection and the techno-economics that decide what actually gets built.</p></d
       <div class="tags"><span class="tag">Python</span><span class="tag">Quantile regression</span><span class="tag">Conformal prediction</span><span class="tag">Time-series transformers</span><span class="more">Read more →</span></div>
     </a>
     <a class="project" href="projects/multicriteria-load-control.html">
-      <p class="project-meta">KTH EI2525 · 2025 · with Dio Randa Damara and Hadrien Guillaud</p>
+      <p class="project-meta">KTH EI2525 · 2025</p>
       <h3>Multicriteria load control for a domestic water heater</h3>
       <p class="blurb">A plug-in box that decides when a household water heater should run. Forecasting, optimisation and real-time control in one loop — built, wired and tested on a bench.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">Linear programming</span><span class="tag">Raspberry Pi 5</span><span class="tag">Arduino</span><span class="tag">Triac</span><span class="tag">Nord Pool · SMHI</span><span class="more">Read more →</span></div>
     </a>
     <a class="project" href="projects/east-england-forecasting.html">
-      <p class="project-meta">KTH EG2140 · 2025 · IEEE competition sponsored by Ørsted and rebase.energy</p>
+      <p class="project-meta">KTH EG2140 · 2025</p>
       <h3>Probabilistic renewable forecasting, East England</h3>
       <p class="blurb">Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, scored on pinball loss — landing inside the range of the competition&rsquo;s top fifteen entries.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">CatBoost</span><span class="tag">LightGBM</span><span class="tag">Quantile stacking</span><span class="tag">Pinball loss</span><span class="more">Read more →</span></div>
@@ -100,20 +109,26 @@ connection and the techno-economics that decide what actually gets built.</p></d
     <a class="project" href="projects/wind-farm-feasibility.html">
       <p class="project-meta">KTH EG2340 · 2025 · team project</p>
       <h3>Wind farm feasibility study, Skärvagshållan</h3>
-      <p class="blurb">Technical and economic assessment of an 80 MW wind farm in mountainous central Sweden, where two of the obvious answers turned out to be wrong once the details were modelled.</p>
+      <p class="blurb">Technical and economic assessment of an 80 MW wind farm in mountainous central Sweden.</p>
       <div class="tags"><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">Jensen wake model</span><span class="tag">LCOE / NPV</span><span class="tag">BESS sizing</span><span class="more">Read more →</span></div>
     </a>
     <a class="project" href="projects/nitor-intraday-prices.html">
       <p class="project-meta">Nitor Energy quantitative trading competition · 2026</p>
       <h3>Intraday electricity price forecasting, six European markets</h3>
-      <p class="blurb">A competition solution for intraday price forecasting across six European markets, built around the part that actually drives the error: spikes.</p>
+      <p class="blurb">A competition solution for intraday price forecasting across six European markets.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Ensembles</span><span class="more">Read more →</span></div>
     </a>
-    <a class="project" href="projects/power-electronics-machines.html">
-      <p class="project-meta">KTH EJ2301 &amp; EJ2201 · 2024–2025</p>
-      <h3>Power electronics and electrical machines</h3>
-      <p class="blurb">Hardware-level coursework behind the systems work — converter component selection from datasheets, and machine parameter estimation from laboratory measurements.</p>
-      <div class="tags"><span class="tag">MATLAB</span><span class="tag">Simulink</span><span class="tag">PSpice</span><span class="tag">Parameter estimation</span><span class="more">Read more →</span></div>
+    <a class="project" href="projects/electrical-machines.html">
+      <p class="project-meta">KTH EJ2201, Electrical Machines and Drives · 2024</p>
+      <h3>Electrical machines — parameter estimation and control</h3>
+      <p class="blurb">DC, synchronous and induction machines, combining laboratory measurements, parameter identification, mathematical modelling and simulation in MATLAB/Simulink.</p>
+      <div class="tags"><span class="tag">MATLAB</span><span class="tag">Simulink</span><span class="tag">Parameter estimation</span><span class="tag">MTPA</span><span class="more">Read more →</span></div>
+    </a>
+    <a class="project" href="projects/power-electronics.html">
+      <p class="project-meta">KTH EJ2301, Power Electronics · 2024</p>
+      <h3>Step-down (buck) DC-DC converter design</h3>
+      <p class="blurb">A full operational design of a buck DC-DC converter, with components selected from real datasheets, through to thermal design, feedback control and dynamic simulation.</p>
+      <div class="tags"><span class="tag">MATLAB</span><span class="tag">PSpice</span><span class="tag">IGBT selection</span><span class="tag">Thermal design</span><span class="more">Read more →</span></div>
     </a>
   </div>
 </section>
@@ -123,11 +138,11 @@ connection and the techno-economics that decide what actually gets built.</p></d
     <h2>Background</h2>
     
     <div class="edu-item">
-      <div class="edu-when">Aug 2024 — Aug 2026</div>
+      <div class="edu-when">Aug 2024 — Jun 2026</div>
       <div>
         <h3>MSc, Electric Power Engineering</h3>
         <p class="where">KTH Royal Institute of Technology · Stockholm</p>
-        <p class="note">Power system analysis and operation, electricity market analysis, power system planning, wind power systems, communication and control in electric power systems, and machine learning applications in electric power systems. Degree project carried out at rebase.energy.</p>
+        <p class="note">Power System Analysis, Wind Power Systems, Power System Planning, Electricity Market Analysis, Computer Applications &amp; Machine Learning in Electric Power Systems, Electricity Pricing &amp; Emissions, Communication &amp; Control in Electric Power Systems, Power Grid Technology &amp; Substation Design. Degree project carried out at rebase.energy.</p>
       </div>
     </div>
     <div class="edu-item">
@@ -135,7 +150,7 @@ connection and the techno-economics that decide what actually gets built.</p></d
       <div>
         <h3>Diploma, Electrical and Computer Engineering</h3>
         <p class="where">National Technical University of Athens · Athens</p>
-        <p class="note">Five-year integrated degree, 300 ECTS, major in energy. Thesis on wind turbine energy forecasting with machine learning and meta-learning methods, at the Electric Devices and Decision Systems Lab.</p>
+        <p class="note">Five-year integrated degree, 300 ECTS, major in electric power &amp; energy systems. Thesis on wind turbine energy forecasting with machine learning and meta-learning methods, at the Electric Devices and Decision Systems Lab.</p>
       </div>
     </div>
     <div class="edu-item">
@@ -152,8 +167,7 @@ connection and the techno-economics that decide what actually gets built.</p></d
 <section id="contact">
   <div class="wrap">
     <h2>Contact</h2>
-    <div class="contact-text"><p>I am always glad to talk about forecasting, electricity markets, or anything at the
-intersection of data and the grid — whether that is a role, a collaboration, or just an
+    <div class="contact-text"><p>I am always glad to talk about energy systems, sustainable energy solutions, modern somputational solutions in energy systems or anything at the intersection of data and the grid — whether that is a role, a collaboration, or just an
 interesting problem.</p></div>
     <div class="contact-row"><a class="btn primary" href="mailto:bournazosiraklis@gmail.com">Email me</a><a class="btn" href="https://www.linkedin.com/in/iraklis-bournazos">LinkedIn</a><a class="btn" href="https://github.com/Iraklis-Bournazos">GitHub</a></div>
   </div>
@@ -166,6 +180,24 @@ interesting problem.</p></div>
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

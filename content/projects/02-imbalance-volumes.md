@@ -8,45 +8,43 @@ tags: [Python, Quantile regression, Conformal prediction, Time-series transforme
 muted_tags: [Internal work]
 ---
 
-## Why imbalance is a different problem
+## Scope
 
-System imbalance is not load. It is the residual of everything that did not go according to
-plan — forecast error, outages, market behaviour — and it is dominated by the hours when
-something unusual happened. A model tuned to minimise average error will be excellent on the
-quiet hours that nobody cares about and useless on the ones that cost money.
+Forecasting the 15-minute system imbalance volume in SE3, from 15 minutes up to 12 hours ahead, using probabilistic machine-learning models built around the information that would actually have been available at each prediction time.
 
-That shapes every decision in the pipeline.
+The target is the signed balancing volume activated by the TSO: positive values indicate a short system requiring up-regulation, while negative values indicate a long system requiring down-regulation.
 
-## Structure
+## Modelling approach
 
-The pipeline forecasts imbalance volumes across the Swedish bidding zones with **dedicated
-models per lead time** rather than one model asked to cover every horizon. What is knowable
-about hour *h+1* is not what is knowable about hour *h+36*, and collapsing those into a
-single model quietly wastes information at short horizons.
+I built 15 independent single-horizon XGBoost models, one for each lead time from 15 minutes to 12 hours. Each horizon has its own feature set because the useful information changes substantially with lead time. Also a pooled strategy was tested and evaluated.
 
-The whole thing is built to be **leakage-free**: at every horizon, the model sees only what
-would genuinely have been available at that moment. This is less trivial than it sounds when
-market data, forecasts and settlement values all arrive on different schedules.
+The pipeline was designed to be fully leakage-safe. Measured quantities, forecasts and market data were shifted according to their real publication delays, so every model only sees information that would genuinely have existed at issue time.
 
-## Probabilistic output
+## Probabilistic forecasts
 
-The output is a distribution, not a number:
+For each horizon it produces:
 
 - **Quantile regression** for the shape of the distribution
 - **Conformal calibration** so the intervals mean what they claim to mean
 - **Tail-exceedance spike detection** for the extreme hours specifically
 - **Directional probabilities** — the probability that the system is long or short, which is
   often the decision-relevant quantity rather than the magnitude
+- **SHAP**-based feature attributions
 
-## Feature selection
+This makes the forecast useful for both expected imbalance magnitude and risk around extreme or directional outcomes.
+
+## Feature engineering and selection
+
+The project combined 4,800+ candidate features from grid, market, weather and forecast data. Sources included ENTSO-E, Nord Pool, JAO, Rebase grid and weather data, together with internally generated driver forecasts.
+
 
 Feature selection uses a **Boruta-style shadow-feature pipeline**: real features must
-outperform randomised copies of themselves to survive. Alongside that, per-horizon
-correlation studies across numerical weather prediction models, intraday market data and
-day-ahead market data, since which sources matter changes substantially with lead time.
+outperform randomised copies of themselves to survive. Alongside that, extensive per-horizon
+correlation analysis between every candidate input and the target, across numerical weather
+prediction models and intraday and day-ahead market data.
 
 I also implemented **transformer time-series foundation models** as an input generator,
-using their outputs as features to improve short-term accuracy.
+using their outputs as features to improve short-term accuracy in different lead times of forecasting.
 
 ## Note
 

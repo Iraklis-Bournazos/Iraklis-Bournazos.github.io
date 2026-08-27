@@ -8,6 +8,5 @@ links:
     url: https://github.com/Iraklis-Bournazos
 ---
 
-I am always glad to talk about forecasting, electricity markets, or anything at the
-intersection of data and the grid — whether that is a role, a collaboration, or just an
+I am always glad to talk about energy systems, sustainable energy solutions, modern somputational solutions in energy systems or anything at the intersection of data and the grid — whether that is a role, a collaboration, or just an
 interesting problem.

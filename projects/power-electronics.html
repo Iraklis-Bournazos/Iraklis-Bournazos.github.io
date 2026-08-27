@@ -3,15 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Intraday electricity price forecasting, six European markets — Iraklis Bournazos</title>
-<meta name="description" content="A competition solution for intraday price forecasting across six European markets.
-">
-<link rel="canonical" href="https://iraklis-bournazos.github.io/projects/nitor-intraday-prices.html">
+<title>Step-down (buck) DC-DC converter design — Iraklis Bournazos</title>
+<meta name="description" content="A full operational design of a buck DC-DC converter, with components selected from real datasheets, through to thermal design, feedback control and dy">
+<link rel="canonical" href="https://iraklis-bournazos.github.io/projects/power-electronics.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Intraday electricity price forecasting, six European markets — Iraklis Bournazos">
-<meta property="og:description" content="A competition solution for intraday price forecasting across six European markets.
-">
-<meta property="og:url" content="https://iraklis-bournazos.github.io/projects/nitor-intraday-prices.html">
+<meta property="og:title" content="Step-down (buck) DC-DC converter design — Iraklis Bournazos">
+<meta property="og:description" content="A full operational design of a buck DC-DC converter, with components selected from real datasheets, through to thermal design, feedback control and dy">
+<meta property="og:url" content="https://iraklis-bournazos.github.io/projects/power-electronics.html">
 <meta property="og:image" content="https://iraklis-bournazos.github.io/img/photo.jpg">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,18 +57,22 @@
 <section class="hero project-hero">
   <div class="wrap">
     <a class="back" href="../index.html#work">← All work</a>
-    <p class="project-meta">Nitor Energy quantitative trading competition · 2026</p>
-    <h1>Intraday electricity price forecasting, six European markets</h1>
-    <p class="role">A competition solution for intraday price forecasting across six European markets.</p>
-    <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Ensembles</span></div>
-    <div class="contact-row"><a class="btn" href="https://github.com/Iraklis-Bournazos/nitor-energy-forecasting">Code on GitHub</a></div>
+    <p class="project-meta">KTH EJ2301, Power Electronics · 2024</p>
+    <h1>Step-down (buck) DC-DC converter design</h1>
+    <p class="role">A full operational design of a buck DC-DC converter, with components selected from real datasheets, through to thermal design, feedback control and dynamic simulation.</p>
+    <div class="tags"><span class="tag">MATLAB</span><span class="tag">PSpice</span><span class="tag">IGBT selection</span><span class="tag">Thermal design</span></div>
+    <div class="contact-row"><a class="btn primary" href="../files/projects/ej2301-buck-converter-design.pdf">Read the full report (PDF)</a></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <article class="prose"><p>Participated in Nitor Energy’s 2026 Quantitative Trading Case Competition, developing machine-learning models to forecast intraday electricity prices from weather and energy-market features.</p>
-<p>The final model combined extensive feature engineering with gradient-boosted models such as LightGBM and CatBoost, with particular focus on handling the strongly heavy-tailed price distribution and rare price spikes.</p></article>
+    <article class="prose"><p>Designed and analysed a high-power buck DC–DC converter for a 500–580 V input range, a regulated 260 V output and loads up to 20 A. The project covered the complete converter design process, from semiconductor and passive-component selection to thermal design, feedback control and dynamic simulation.</p>
+<p>I selected the IGBT and freewheeling diode based on voltage/current ratings, switching behaviour, thermal limits and cost, and calculated their conduction and switching losses from manufacturer datasheets. I determined a 7 kHz switching frequency and sized the LC output filter to satisfy the converter&rsquo;s voltage- and current-ripple constraints.</p>
+<p>I also designed the thermal management system by deriving the required sink-to-ambient thermal resistance and dimensioning a heat sink for the semiconductor losses.</p>
+<p>For the control system, I modelled the converter power stage and PWM dynamics, designed a compensated voltage-feedback controller using the K-factor approach, and evaluated the frequency response in MATLAB. The controller was then implemented and tested in PSpice.</p>
+<p>Finally, I compared open- and closed-loop operation and performed a 15 A → 20 A load-step test. The closed-loop system improved voltage regulation and successfully recovered the output voltage to approximately 260 V following the load disturbance.</p>
+<p><strong>Tools &amp; methods:</strong> PSpice · MATLAB · Power Electronics · DC–DC Converters · PWM · Feedback Control · Frequency-Domain Analysis · Thermal Design</p></article>
   </div>
 </section>
 

@@ -16,6 +16,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
@@ -28,6 +38,17 @@
       <a href="../cv.html">CV</a>
       <a href="../index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -36,7 +57,7 @@
 <section class="hero project-hero">
   <div class="wrap">
     <a class="back" href="../index.html#work">← All work</a>
-    <p class="project-meta">KTH EG2140 · 2025 · IEEE competition sponsored by Ørsted and rebase.energy</p>
+    <p class="project-meta">KTH EG2140 · 2025</p>
     <h1>Probabilistic renewable forecasting, East England</h1>
     <p class="role">Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, scored on pinball loss — landing inside the range of the competition&rsquo;s top fifteen entries.</p>
     <div class="tags"><span class="tag">Python</span><span class="tag">CatBoost</span><span class="tag">LightGBM</span><span class="tag">Quantile stacking</span><span class="tag">Pinball loss</span></div>
@@ -48,23 +69,15 @@
   <div class="wrap">
     <article class="prose"><h2 id="the-task">The task</h2>
 <p>An IEEE Power &amp; Energy Society competition sponsored by Ørsted and rebase.energy: forecast
-the combined wind and solar generation of <strong>Hornsea 1</strong> — a 1.2 GW offshore wind farm 120 km
-off the Yorkshire coast — together with East England&rsquo;s solar output.</p>
-<p>Day-ahead, for each half-hour period, submitted as <strong>quantiles from 10% to 90%</strong> and scored
-on pinball loss. Trained and tested on 2020–2023.</p>
-<h2 id="why-probabilistic">Why probabilistic</h2>
-<p>A point forecast of wind output answers the wrong question. If you are sizing reserve or
-placing a bid, you need to know how wrong the forecast might be and in which direction.
-Pinball loss rewards exactly that — being confident when confidence is warranted and
-uncertain when it is not.</p>
-<p>This was my first serious quantile forecasting work, and it is the direct ancestor of what I
-now do professionally on imbalance volumes.</p>
+the combined wind and solar generation of <strong>Hornsea 1</strong> — a 1.2 GW offshore wind farm off the
+Yorkshire coast — together with East England&rsquo;s solar output.</p>
+<p>Day-ahead, per half-hour period, submitted as <strong>quantiles from 10% to 90%</strong> and scored on
+pinball loss. Trained and tested on 2020–2023.</p>
 <h2 id="approach">Approach</h2>
-<p>Three base models — random forest, LightGBM and CatBoost — then a <strong>stacked ensemble</strong>. For
-each quantile level separately, the base models&rsquo; validation predictions become input
-features to a meta-model trained with <code>QuantileRegressor</code> under pinball loss. That lets the
-ensemble weight the base models differently <em>per quantile</em>, which matters because a model
-good at the median is not necessarily good in the tails.</p>
+<p>Three base models — random forest, LightGBM and CatBoost — combined in a <strong>stacked
+ensemble</strong>. For each quantile level separately, the base models&rsquo; validation predictions
+become input features to a meta-model trained with <code>QuantileRegressor</code> under pinball loss,
+so the ensemble can weight the base models differently per quantile.</p>
 <h2 id="results">Results</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -108,21 +121,11 @@ good at the median is not necessarily good in the tails.</p>
 </tr>
 </tbody>
 </table></div>
-<p>The ensemble cut pinball loss by roughly <strong>60% against the naive benchmark</strong> and lifted R²
-from 0.46 to 0.84. <strong>The competition&rsquo;s top fifteen entries scored between 22.18 and 33.92
-MWh, so 29.39 sits inside that band.</strong></p>
-<p>Feature importance came out where physics says it should: solar radiation dominates the
-solar forecast, wind speed the wind forecast.</p>
-<h2 id="what-i-would-fix">What I would fix</h2>
-<p>LightGBM was the weak link — clearly worse on wind. Interestingly it was also the only model
-showing <em>no</em> overfitting, with near-identical train and test scores, while the others all
-degraded. Because ensemble weights come from validation performance, its weakness was
-largely absorbed rather than propagated, but tuning it properly would add robustness rather
-than just accuracy. Clipping quantile outputs to physical capacity limits is the other
-obvious improvement — the model has no idea Hornsea 1 cannot exceed 1.2 GW.</p>
-<h2 id="context">Context</h2>
-<p>Team project with Tilde Franzén and Victor Pettersson. Supervised by Xavier Weiss, with
-Sebastian Haglund as industry mentor.</p></article>
+<p>Pinball loss down roughly <strong>60% against the benchmark</strong>, R² from 0.46 to 0.84. The
+competition&rsquo;s top fifteen entries scored between <strong>22.18 and 33.92 MWh</strong>, so 29.39 sits
+inside that band.</p>
+<p>Feature importance came out where physics says it should: solar radiation dominates the solar
+forecast, wind speed the wind forecast.</p></article>
   </div>
 </section>
 
@@ -133,6 +136,24 @@ Sebastian Haglund as industry mentor.</p></article>
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

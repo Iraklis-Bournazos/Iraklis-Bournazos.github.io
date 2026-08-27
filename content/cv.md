@@ -1,6 +1,6 @@
 ---
 name: Iraklis Bournazos
-tagline: Electrical engineer — energy forecasting and power systems
+tagline: Electrical & Computer Engineer — Electric Power Engineer 
 location: Stockholm, Sweden
 email: bournazosiraklis@gmail.com
 phone: "+46 70 498 45 95"
@@ -10,9 +10,7 @@ site: iraklis-bournazos.github.io
 
 summary: >
   Electrical and computer engineer with an MSc in Electric Power Engineering from KTH,
-  specialising in power system operation, planning and electricity markets. I build
-  forecasting systems for net load, renewable generation, prices and imbalance — and I am
-  equally at home in the power system engineering underneath them.
+  specialising in power system operation, control, planning, electricity markets and modern computational methods in energy systems. 
 
 experience:
   - when: Jun 2026 — present
@@ -26,7 +24,7 @@ experience:
         calibration, adding tail-exceedance spike detection and directional probabilities
         of system imbalance.
       - Designed a Boruta-style shadow-feature importance pipeline and per-horizon
-        correlation studies across weather prediction models and intraday and day-ahead
+        correlation studies across weather prediction models, intraday and day-ahead
         market data, and implemented transformer time-series foundation models as an
         input generator for short-term accuracy.
 
@@ -43,8 +41,7 @@ experience:
         industrial — and showed that industrial net load is a structurally different
         problem requiring a hybrid deployment strategy.
       - Investigated behind-the-meter solar PV penetration and grid observability, and
-        established through a controlled synthetic experiment that the limiting factor is
-        data visibility rather than model architecture.
+        established through a controlled synthetic experiment.
       - Built the preprocessing and feature pipelines, with residual analysis, bias
         correction and drift handling for robustness under changing conditions.
 
@@ -66,13 +63,12 @@ experience:
         corporate social responsibility data from partner organisations.
 
 education:
-  - when: Aug 2024 — Aug 2026
+  - when: Aug 2024 — Jun 2026
     degree: MSc, Electric Power Engineering
     org: KTH Royal Institute of Technology
     place: Stockholm, Sweden
     notes:
-      - "Two-year degree, 120 ECTS. Specialisation: power system operation, planning,
-        control and electricity markets."
+      - "Two-year degree, 120 ECTS."
       - "Degree project: A Municipal-Scale Net Load Forecasting Framework for Norway,
         carried out at rebase.energy."
 
@@ -95,23 +91,23 @@ projects:
     title: Multicriteria Load Control — price-responsive water heater controller
     org: KTH EI2525, Electric Power Engineering Project
     text: >
-      Linear-programming scheduler running a domestic water heater against spot prices and PV
+      Built a prototype device for an optimization scheduler running a domestic water heater against spot prices and PV
       forecasts, with a real-time supervisory loop on live smart-meter data. Raspberry Pi 5,
       Arduino triac stage, zero-crossing detector.
 
   - when: 2025
     title: Probabilistic renewable generation forecasting, East England
-    org: KTH EG2140 — IEEE competition sponsored by Ørsted and rebase.energy
+    org: KTH EG2140 
     text: >
       Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, submitted as
-      quantiles and scored on pinball loss. Random forest, LightGBM and CatBoost ensemble.
+      quantiles and scored on pinball loss. Random forest, LightGBM and CatBoost ensemble modelling.
 
   - when: 2025
     title: Wind farm feasibility and techno-economic study, bidding zone SE3
     org: KTH EG2340, Wind Power Systems
     text: >
-      80 MW wind farm in central Sweden — turbine selection, layout and electrical topology,
-      grid connection costing, LCOE and NPV across an investment range, BESS sizing on SE3 prices.
+      80 MW wind farm feasibility study in central Sweden — turbine selection, layout and electrical topology,
+      grid connection costing, LCOE and NPV across an investment range, BESS optimization and sizing.
 
   - when: 2025
     title: Hydro scheduling and power system planning

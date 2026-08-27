@@ -67,6 +67,39 @@ def md_inline(text):
     return re.sub(r"^<p>|</p>$", "", out.strip())
 
 
+def split_h2_raw(body_md):
+    """Turn '## Title\ntext' blocks into [(title, raw_markdown), ...]."""
+    items = []
+    for chunk in re.split(r"^## ", body_md, flags=re.M):
+        if not chunk.strip():
+            continue
+        title, _, rest = chunk.partition("\n")
+        items.append((title.strip(), rest.strip()))
+    return items
+
+
+def parse_focus(body_md):
+    """A paragraph starting 'Focus:' becomes keyword chips; the rest stays prose."""
+    out = []
+    for title, chunk in split_h2_raw(body_md):
+        chips, lede, prose = [], [], []
+        for para in [p.strip() for p in chunk.split("\n\n") if p.strip()]:
+            if para.lower().startswith("focus:"):
+                raw = para.split(":", 1)[1].strip().rstrip(".")
+                parts = [re.sub(r"^\s*and\s+", "", p.strip(), flags=re.I).strip()
+                         for p in raw.replace("\n", " ").split(",")]
+                parts = [p for p in parts if p]
+                # only render as chips when it reads as a keyword list, not a sentence
+                if len(parts) >= 3 and all(len(p) <= 46 for p in parts):
+                    chips.extend(parts)
+                else:
+                    lede.append(raw)
+            else:
+                prose.append(para)
+        out.append((title, chips, lede, md("\n\n".join(prose))))
+    return out
+
+
 def split_h2(body_md):
     """Turn '## Title\\ntext' blocks into [(title, html), ...]."""
     items = []
@@ -112,6 +145,16 @@ def page(title, description, body, depth=0, cv_page=False, canon=""):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{up}style.css">
+<script>
+  (function () {{
+    try {{
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") {{
+        document.documentElement.setAttribute("data-theme", t);
+      }}
+    }} catch (e) {{}}
+  }})();
+</script>
 </head>
 <body{cls}>
 
@@ -124,6 +167,17 @@ def page(title, description, body, depth=0, cv_page=False, canon=""):
       <a href="{up}cv.html">CV</a>
       <a href="{up}index.html#contact" class="hide-sm">Contact</a>
       <a href="https://github.com/Iraklis-Bournazos">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </div>
@@ -136,6 +190,24 @@ def page(title, description, body, depth=0, cv_page=False, canon=""):
     <span><a href="https://github.com/Iraklis-Bournazos">Source on GitHub</a></span>
   </div>
 </footer>
+
+<script>
+  (function () {{
+    var root = document.documentElement;
+    function current() {{
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }}
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {{
+      btn.addEventListener("click", function () {{
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try {{ localStorage.setItem("theme", next); }} catch (e) {{}}
+      }});
+    }});
+  }})();
+</script>
 
 </body>
 </html>
@@ -157,16 +229,40 @@ def load_projects():
     return projects
 
 
+def require(meta, keys, filename):
+    missing = [k for k in keys if not meta.get(k)]
+    if missing:
+        raise SystemExit(
+            f"\n!! {filename} is missing: {', '.join(missing)}\n"
+            f"   Add each one on its own line between the --- lines, e.g.\n"
+            f"   {missing[0]}: some text\n")
+
+
 def build_home(projects):
     home_meta, home_body = read(CONTENT / "home.md")
+    require(home_meta, ["name", "page_title", "description"], "content/home.md")
     _, focus_md = read_raw(CONTENT / "focus.md")
     bg_meta, _ = read(CONTENT / "background.md")
     contact_meta, contact_body = read(CONTENT / "contact.md")
 
-    focus = "".join(
-        f"<div><h4>{title}</h4>{html}</div>"
-        for title, html in split_h2(focus_md)
-    )
+    focus = ""
+    for i, (title, chips, lede, prose) in enumerate(parse_focus(focus_md), start=1):
+        chip_html = ""
+        if chips:
+            chip_html = ('<ul class="chips">'
+                         + "".join(f"<li>{esc(c)}</li>" for c in chips)
+                         + "</ul>")
+        lede_html = "".join(f'<p class="focus-lede">{md_inline(l)}</p>' for l in lede)
+        focus += (f'<div class="focus-card">'
+                  f'<div class="focus-head">'
+                  f'<span class="focus-num">{i:02d}</span>'
+                  f'<h4>{esc(title)}</h4>'
+                  f'</div>'
+                  f'<div class="focus-main">'
+                  f'{chip_html}{lede_html}'
+                  f'<div class="focus-body">{prose}</div>'
+                  f'</div>'
+                  f'</div>')
 
     cards = []
     for p in projects:
@@ -197,17 +293,25 @@ def build_home(projects):
         for i, l in enumerate(contact_meta.get("links", []))
     )
 
+    eyebrow = (f'<p class="eyebrow">{esc(home_meta["location"])}</p>'
+               if home_meta.get("location") else "")
+    role = (f'<p class="role">{esc(home_meta["role"])}</p>'
+            if home_meta.get("role") else "")
+    status = (f'<div class="status"><span class="dot"></span>'
+              f'{md_inline(home_meta["status"])}</div>'
+              if home_meta.get("status") else "")
+
     body = f"""
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <img class="portrait" src="img/photo.jpg" alt="Iraklis Bournazos">
       <div>
-        <p class="eyebrow">{esc(home_meta['location'])}</p>
+        {eyebrow}
         <h1>{esc(home_meta['name'])}</h1>
-        <p class="role">{esc(home_meta['role'])}</p>
+        {role}
         {home_body}
-        <div class="status"><span class="dot"></span>{md_inline(home_meta['status'])}</div>
+        {status}
       </div>
     </div>
   </div>
@@ -249,6 +353,9 @@ def build_home(projects):
 
 def build_project(p):
     links = ""
+    for r in p.get("reports", []):
+        links += (f'<a class="btn primary" href="../files/projects/{r["file"]}">'
+                  f'{esc(r["label"])}</a>')
     if p.get("report"):
         links += (f'<a class="btn primary" href="../files/projects/{p["report"]}">'
                   f'Read the full report (PDF)</a>')
@@ -388,8 +495,11 @@ def check_reports(projects):
     """Fail loudly if a project points at a report PDF that does not exist."""
     missing = []
     for p in projects:
-        if p.get("report") and not (ROOT / "files" / "projects" / p["report"]).exists():
-            missing.append(f"  {p['slug']}: files/projects/{p['report']}")
+        wanted = [p["report"]] if p.get("report") else []
+        wanted += [r["file"] for r in p.get("reports", [])]
+        for w in wanted:
+            if not (ROOT / "files" / "projects" / w).exists():
+                missing.append(f"  {p['slug']}: files/projects/{w}")
     if missing:
         print("\n!! MISSING REPORT FILES — these download buttons will not work:")
         print("\n".join(missing))
@@ -407,6 +517,12 @@ def main():
         if p["has_page"]:
             build_project(p)
             built += 1
+    keep = {f"{p['slug']}.html" for p in projects if p["has_page"]}
+    for stale in OUT_PROJECTS.glob("*.html"):
+        if stale.name not in keep:
+            stale.unlink()
+            print(f"Removed {stale.name} (no content file any more)")
+
     print(f"Built index.html, cv.html and {built} project pages.")
     print("Open index.html in your browser to check, then: git add -A && git commit -m 'update' && git push")
 
