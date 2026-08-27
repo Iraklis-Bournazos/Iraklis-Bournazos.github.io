@@ -546,7 +546,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 .cv-head {
   display: grid;
-  grid-template-columns: 118px 1fr 118px;
+  grid-template-columns: 118px 1fr 67px;
   gap: 26px;
   align-items: center;
   padding-bottom: 18px;
@@ -583,8 +583,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .cv-contact a { color: var(--text-soft); }
 
 .cv-qr { text-align: center; }
-.cv-qr { display: flex; justify-content: flex-end; }
-.cv-qr svg { width: 118px; height: 118px; display: block; }
+.cv-qr { display: flex; justify-content: flex-end; align-items: center; }
+.cv-qr svg { width: 67px; height: 67px; display: block; }
 .cv-qr span {
   display: block;
   font-family: var(--mono);
