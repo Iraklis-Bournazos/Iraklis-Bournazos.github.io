@@ -914,3 +914,12 @@ ul.cols2 li { break-inside: avoid; }
   gap: 7px;
 }
 .hero-actions .btn svg { width: 13px; height: 13px; }
+
+/* the top bar is sticky (62px), so anchored sections must clear it —
+   without this, clicking Work/Background/Contact hides the heading behind it */
+section[id],
+:target { scroll-margin-top: 80px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
