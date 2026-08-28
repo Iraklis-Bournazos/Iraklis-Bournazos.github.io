@@ -62,7 +62,7 @@
     <p class="project-meta">MSc thesis · rebase.energy &amp; KTH · 2026</p>
     <h1>Municipal-scale net load forecasting for Norway</h1>
     <p class="role">Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by consumer segment.</p>
-    <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">ERA5</span><span class="tag">GeoPandas</span></div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">Elhub AMI</span><span class="tag">NWP</span></div>
     <div class="contact-row"><a class="btn primary" href="../files/projects/msc-thesis-net-load-forecasting-norway.pdf">Read the full report (PDF)</a><a class="btn" href="https://github.com/Iraklis-Bournazos/norway-net-load-forecasting">Code on GitHub</a></div>
   </div>
 </section>
@@ -74,7 +74,7 @@
 generation consumed on site. Self-consumed solar never crosses a metering point the operator
 owns, so it is structurally unobservable. Norway&rsquo;s <em>Plusskunde</em> scheme, which lets households
 export from installations up to 100 kW, has made this grow quickly.</p>
-<p><strong>Main question:</strong> how efficiently can net load be forecast at municipal resolution, across
+<p><strong>Main question:</strong> How efficiently can net load be forecast at municipal resolution, across
 an entire country, using nothing but public data?</p>
 <h2 id="data">Data</h2>
 <p>Elhub hourly AMI metering, already split into private residential, commercial and industrial,
@@ -93,20 +93,19 @@ matched to each municipality by a weather-station selection algorithm.</p>
 mean annual municipality MAPE of <strong>6.69%</strong>, beating the benchmark in <strong>347 of 350
 municipalities</strong> and the linear-regression baseline in 246 of 350. Commercial reaches 9.66%,
 winning in 313 of 350.</p>
-<p>Industrial is structurally different: production schedules are uncorrelated with weather and
-calendar, and the win rate sits near 50%. The recommendation is a two-category hybrid.</p>
+<p>Industrial is structurally different: production schedules are uncorrelated with weather fluctuations. The recommendation is a two-category hybrid validated approach.</p>
 <h2 id="the-synthetic-experiment">The synthetic experiment</h2>
 <p>The prosumer-aware model — given solar capacity and export features — produced <strong>no</strong>
-systematic national improvement: mean gain −0.03 pp across 350 municipalities.</p>
-<p>A controlled synthetic experiment isolates why. Given exact, noiseless capacity information,
+systematic national improvement.</p>
+<p>A controlled synthetic experiment across multiple BTM solar penetration scenarios isolates why. Given exact, noiseless capacity information,
 the same architecture improves consistently across every growth scenario and fold, by
 <strong>+0.16 to +0.37 pp</strong>. The architecture is sound; the limit is in the data — behind-the-meter
 invisibility, low penetration, and contamination in the registry, since Elhub&rsquo;s E19 category
 pools residential, commercial, agricultural and industrial generation together.</p>
 <p>The operational answer is a conservative portfolio: deploy the prosumer-aware model only in
-the 48 municipalities (13.7%) where it improves across every fold, and the weather-based
+the 48 municipalities (13.7%) where it has validated improved results across every fold, and the weather-based
 model elsewhere. For a DSO choosing between better models and better visibility of
-distributed generation, this says: fix the visibility first.</p></article>
+distributed generation, this says: improve the visibility first.</p></article>
   </div>
 </section>
 

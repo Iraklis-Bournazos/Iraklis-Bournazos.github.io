@@ -74,16 +74,15 @@
 <p>I built 15 independent single-horizon XGBoost models, one for each lead time from 15 minutes to 12 hours. Each horizon has its own feature set because the useful information changes substantially with lead time. Also a pooled strategy was tested and evaluated.</p>
 <p>The pipeline was designed to be fully leakage-safe. Measured quantities, forecasts and market data were shifted according to their real publication delays, so every model only sees information that would genuinely have existed at issue time.</p>
 <h2 id="probabilistic-forecasts">Probabilistic forecasts</h2>
-<p>For each horizon it produces:</p>
+<p>For each horizon the main outputs are:</p>
 <ul>
-<li><strong>Quantile regression</strong> for the shape of the distribution</li>
-<li><strong>Conformal calibration</strong> so the intervals mean what they claim to mean</li>
-<li><strong>Tail-exceedance spike detection</strong> for the extreme hours specifically</li>
-<li><strong>Directional probabilities</strong> — the probability that the system is long or short, which is
-  often the decision-relevant quantity rather than the magnitude</li>
-<li><strong>SHAP</strong>-based feature attributions</li>
+<li><strong>Quantile forecasts</strong> describing the expected distribution of imbalance volume</li>
+<li><strong>Calibrated prediction intervals</strong> using conformal methods</li>
+<li><strong>Directional probabilities</strong> estimating the probability that the system will be long or short</li>
+<li><strong>Tail-event probabilities</strong> for unusually large imbalance volumes</li>
 </ul>
-<p>This makes the forecast useful for both expected imbalance magnitude and risk around extreme or directional outcomes.</p>
+<p>These outputs are complemented by <strong>SHAP-based feature attribution</strong>, which is used to interpret the main drivers behind the forecasts at each horizon.</p>
+<p>This makes the pipeline useful not only for estimating expected imbalance magnitude, but also for understanding uncertainty, direction and extreme-event risk.</p>
 <h2 id="feature-engineering-and-selection">Feature engineering and selection</h2>
 <p>The project combined 4,800+ candidate features from grid, market, weather and forecast data. Sources included ENTSO-E, Nord Pool, JAO, Rebase grid and weather data, together with internally generated driver forecasts.</p>
 <p>Feature selection uses a <strong>Boruta-style shadow-feature pipeline</strong>: real features must
@@ -94,7 +93,7 @@ prediction models and intraday and day-ahead market data.</p>
 using their outputs as features to improve short-term accuracy in different lead times of forecasting.</p>
 <h2 id="note">Note</h2>
 <p>This is internal work at <a href="https://www.rebase.energy/">rebase.energy</a> and the code is not
-public. I am happy to talk about the approach in general terms.</p></article>
+public. I am happy to talk about the approach and findings of this project.</p></article>
   </div>
 </section>
 

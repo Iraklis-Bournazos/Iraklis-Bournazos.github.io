@@ -9,8 +9,7 @@ github: github.com/Iraklis-Bournazos
 site: iraklis-bournazos.github.io
 
 summary: >
-  Electrical and computer engineer with an MSc in Electric Power Engineering from KTH,
-  specialising in power system operation, control, planning, electricity markets and modern computational methods in energy systems. 
+  Electrical and Computer Engineer from the National Technical University of Athens (NTUA) with an MSc in Electric Power Engineering from KTH Royal Institute of Technology. I work at the intersection of power systems, electricity markets, forecasting, and machine learning, combining physical understanding of energy systems with data-driven methods. My focus is on turning complex energy-system behaviour into technically rigorous, practical, and deployable models and tools. I enjoy solving challenging technical problems with a methodical, adaptive and application-oriented mindset, particularly in areas that can make power systems smarter, more efficient, and better prepared for the energy transition.
 
 experience:
   - when: Jun 2026 — present
@@ -18,17 +17,15 @@ experience:
     org: rebase.energy
     place: Stockholm, Sweden
     bullets:
-      - Built an end-to-end, leakage-free imbalance volume forecasting pipeline for the
-        Swedish bidding zones, with dedicated models for each forecast lead time.
-      - Produced probabilistic forecasts using quantile regression with conformal
-        calibration, adding tail-exceedance spike detection and directional probabilities
-        of system imbalance.
-      - Designed a Boruta-style shadow-feature importance pipeline and per-horizon
-        correlation studies across weather prediction models, intraday and day-ahead
-        market data, and implemented transformer time-series foundation models as an
-        input generator for short-term accuracy.
+      - Built an end-to-end, leakage-safe imbalance volume forecasting pipeline
+        for Swedish bidding zones, with dedicated models across forecast horizons.
+      - Developed probabilistic forecasts using quantile regression and conformal
+        calibration, together with directional and extreme-imbalance probabilities.
+      - Built per-horizon feature-selection and analysis pipelines across NWP,
+        intraday and day-ahead market data, and integrated transformer-based
+        time-series foundation models as additional forecasting signals.
 
-  - when: Jan 2026 — Aug 2026
+  - when: Jan 2026 — May 2026
     role: MSc Thesis Project
     org: rebase.energy
     place: Stockholm, Sweden
@@ -37,11 +34,8 @@ experience:
         day-ahead net load forecasting across 350 Norwegian municipalities, using
         LightGBM, CatBoost, XGBoost and ensemble modelling on open Elhub AMI metering
         data and ERA5 weather reanalysis.
-      - Disaggregated forecasting by consumer segment — residential, commercial and
-        industrial — and showed that industrial net load is a structurally different
-        problem requiring a hybrid deployment strategy.
-      - Investigated behind-the-meter solar PV penetration and grid observability, and
-        established through a controlled synthetic experiment.
+      - Investigated behind-the-meter solar PV penetration and grid observability, with
+        the findings established through a controlled synthetic experiment.
       - Built the preprocessing and feature pipelines, with residual analysis, bias
         correction and drift handling for robustness under changing conditions.
 
@@ -64,27 +58,37 @@ experience:
 
 education:
   - when: Aug 2024 — Jun 2026
-    degree: MSc, Electric Power Engineering
+    degree: MSc, Electric Power Engineering (two-year degree, 120 ECTS)
     org: KTH Royal Institute of Technology
     place: Stockholm, Sweden
     notes:
-      - "Two-year degree, 120 ECTS."
-      - "Degree project: A Municipal-Scale Net Load Forecasting Framework for Norway,
-        carried out at rebase.energy."
+      - "**Specialisation** — power system operation, planning, control and
+        electricity markets."
+      - "**Relevant coursework** — Power System Analysis, Wind Power Systems, Power
+        System Planning, Electricity Market Analysis, Computer Applications & Machine
+        Learning in Electric Power Systems, Electricity Pricing & Emissions,
+        Communication & Control in Electric Power Systems, Power Grid Technology &
+        Substation Design."
+      - "**Degree project** — *A Municipal-Scale Net Load Forecasting Framework for
+        Norway*, carried out at rebase.energy."
 
   - when: Dec 2018 — Apr 2024
-    degree: Diploma, Electrical and Computer Engineering
+    degree: Diploma, Electrical and Computer Engineering (five-year degree, 300 ECTS)
     org: National Technical University of Athens
     place: Athens, Greece
     notes:
-      - "Five-year integrated degree, 300 ECTS. Major in Electric Power and Energy Systems,
-        grade 8.01/10. Thesis: Wind Turbine Energy Forecasting with Machine Learning and
-        Meta-Learning Methods."
+      - "**Grade** — 8.01/10, approximately top 15% of the cohort."
+      - "**Specialisation** — electric power and energy systems."
+      - "**Diploma thesis** — *Wind Turbine Energy Forecasting with Machine Learning
+        and Meta-Learning Methods*."
 
   - when: Sep 2021 — Apr 2024
-    degree: Minor, Leadership and Management
+    degree: Minor, Leadership and Management (30 ECTS)
     org: American College of Greece
-    place: Athens, Greece — GPA 3.68/4, taken alongside the NTUA diploma
+    place: Athens, Greece
+    notes:
+      - "**GPA** — 3.68/4."
+      - "Taken alongside the NTUA diploma."
 
 projects:
   - when: 2025

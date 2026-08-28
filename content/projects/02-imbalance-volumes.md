@@ -22,16 +22,16 @@ The pipeline was designed to be fully leakage-safe. Measured quantities, forecas
 
 ## Probabilistic forecasts
 
-For each horizon it produces:
+For each horizon the main outputs are:
 
-- **Quantile regression** for the shape of the distribution
-- **Conformal calibration** so the intervals mean what they claim to mean
-- **Tail-exceedance spike detection** for the extreme hours specifically
-- **Directional probabilities** — the probability that the system is long or short, which is
-  often the decision-relevant quantity rather than the magnitude
-- **SHAP**-based feature attributions
+- **Quantile forecasts** describing the expected distribution of imbalance volume
+- **Calibrated prediction intervals** using conformal methods
+- **Directional probabilities** estimating the probability that the system will be long or short
+- **Tail-event probabilities** for unusually large imbalance volumes
 
-This makes the forecast useful for both expected imbalance magnitude and risk around extreme or directional outcomes.
+These outputs are complemented by **SHAP-based feature attribution**, which is used to interpret the main drivers behind the forecasts at each horizon.
+
+This makes the pipeline useful not only for estimating expected imbalance magnitude, but also for understanding uncertainty, direction and extreme-event risk.
 
 ## Feature engineering and selection
 
@@ -49,4 +49,4 @@ using their outputs as features to improve short-term accuracy in different lead
 ## Note
 
 This is internal work at [rebase.energy](https://www.rebase.energy/) and the code is not
-public. I am happy to talk about the approach in general terms.
+public. I am happy to talk about the approach and findings of this project.

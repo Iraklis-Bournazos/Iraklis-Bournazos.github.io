@@ -2,8 +2,7 @@
 title: Probabilistic renewable forecasting, East England
 meta: KTH EG2140 · 2025 
 summary: >
-  Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, scored on pinball
-  loss — landing inside the range of the competition's top fifteen entries.
+  Day-ahead probabilistic forecasting for the Hornsea 1 offshore wind farm and an East England solar farm.
 tags: [Python, CatBoost, LightGBM, Quantile stacking, Pinball loss]
 report: eg2140-east-england-forecasting.pdf
 ---
@@ -36,7 +35,5 @@ so the ensemble can weight the base models differently per quantile.
 
 Pinball loss down roughly **60% against the benchmark**, R² from 0.46 to 0.84. The
 competition's top fifteen entries scored between **22.18 and 33.92 MWh**, so 29.39 sits
-inside that band.
+among the leading entries on the leaderboard.
 
-Feature importance came out where physics says it should: solar radiation dominates the solar
-forecast, wind speed the wind forecast.

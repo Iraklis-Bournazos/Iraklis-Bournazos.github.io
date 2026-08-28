@@ -4,7 +4,7 @@ meta: MSc thesis · rebase.energy & KTH · 2026
 summary: >
   Day-ahead net load forecasts for all 350 Norwegian municipalities, disaggregated by
   consumer segment.
-tags: [Python, LightGBM, Elhub AMI, ERA5, GeoPandas]
+tags: [Python, LightGBM, Elhub AMI, NWP]
 report: msc-thesis-net-load-forecasting-norway.pdf
 links:
   - label: Code on GitHub
@@ -18,7 +18,7 @@ generation consumed on site. Self-consumed solar never crosses a metering point 
 owns, so it is structurally unobservable. Norway's *Plusskunde* scheme, which lets households
 export from installations up to 100 kW, has made this grow quickly.
 
-**Main question:** how efficiently can net load be forecast at municipal resolution, across
+**Main question:** How efficiently can net load be forecast at municipal resolution, across
 an entire country, using nothing but public data?
 
 ## Data
@@ -43,21 +43,20 @@ mean annual municipality MAPE of **6.69%**, beating the benchmark in **347 of 35
 municipalities** and the linear-regression baseline in 246 of 350. Commercial reaches 9.66%,
 winning in 313 of 350.
 
-Industrial is structurally different: production schedules are uncorrelated with weather and
-calendar, and the win rate sits near 50%. The recommendation is a two-category hybrid.
+Industrial is structurally different: production schedules are uncorrelated with weather fluctuations. The recommendation is a two-category hybrid validated approach.
 
 ## The synthetic experiment
 
 The prosumer-aware model — given solar capacity and export features — produced **no**
-systematic national improvement: mean gain −0.03 pp across 350 municipalities.
+systematic national improvement.
 
-A controlled synthetic experiment isolates why. Given exact, noiseless capacity information,
+A controlled synthetic experiment across multiple BTM solar penetration scenarios isolates why. Given exact, noiseless capacity information,
 the same architecture improves consistently across every growth scenario and fold, by
 **+0.16 to +0.37 pp**. The architecture is sound; the limit is in the data — behind-the-meter
 invisibility, low penetration, and contamination in the registry, since Elhub's E19 category
 pools residential, commercial, agricultural and industrial generation together.
 
 The operational answer is a conservative portfolio: deploy the prosumer-aware model only in
-the 48 municipalities (13.7%) where it improves across every fold, and the weather-based
+the 48 municipalities (13.7%) where it has validated improved results across every fold, and the weather-based
 model elsewhere. For a DSO choosing between better models and better visibility of
-distributed generation, this says: fix the visibility first.
+distributed generation, this says: improve the visibility first.

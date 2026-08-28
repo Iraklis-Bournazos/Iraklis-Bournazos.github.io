@@ -84,8 +84,11 @@ def parse_focus(body_md):
     for title, chunk in split_h2_raw(body_md):
         chips, lede, prose = [], [], []
         for para in [p.strip() for p in chunk.split("\n\n") if p.strip()]:
-            if para.lower().startswith("focus:"):
-                raw = para.split(":", 1)[1].strip().rstrip(".")
+            # matches "Focus: ...", "**Focus:** ..." and "*Focus:* ..."
+            hit = re.match(r"^([*_]{0,2})focus\1?\s*:\1?\s*(.+)$",
+                           para, flags=re.I | re.S)
+            if hit:
+                raw = hit.group(2).strip().rstrip(".")
                 parts = [re.sub(r"^\s*and\s+", "", p.strip(), flags=re.I).strip()
                          for p in raw.replace("\n", " ").split(",")]
                 parts = [p for p in parts if p]
@@ -454,7 +457,7 @@ def build_cv():
       <p class="cv-contact">
         {esc(cv['location'])} &nbsp;·&nbsp; {esc(cv['phone'])} &nbsp;·&nbsp;
         <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
-        <a href="https://{esc(cv['site'])}">{esc(cv['site'])}</a> &nbsp;·&nbsp;
+        <a href="https://{esc(cv['site'])}"><span class="screen-only">Personal page</span><span class="print-only">{esc(cv['site'])}</span></a> &nbsp;·&nbsp;
         <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
         <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
       </p>

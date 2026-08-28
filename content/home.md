@@ -6,8 +6,7 @@ location: Stockholm, Sweden
 
 ---
 
-I have a five-year Diploma in Electrical and Computer Engineering from the **National
-Technical University of Athens (NTUA)** and an MSc in Electric Power Engineering from
-**KTH Royal Institute of Technology**.
+Electrical and Computer Engineer from the **National Technical University of Athens (NTUA)** with MSc in Electric Power Engineering from **KTH Royal Institute of Technology**. My work combines deep energy-domain knowledge with machine learning, forecasting, and optimization, focusing on problems at the intersection of the physical power system, electricity markets, and data — from renewable integration and system operation to probabilistic forecasting and data-driven methods.
 
-I am a power systems engineer combining deep energy-domain expertise with machine learning, forecasting and optimization. I work on problems at the intersection of the physical power system, electricity markets and data — from renewable integration and system operation to probabilistic forecasting and data-driven methods. What interests me most is turning complex energy-system behaviour into models and tools that are technically rigorous and deployable.
+What interests me most is turning complex energy-system behaviour into models and tools that are technically rigorous, practical, and deployable.
+

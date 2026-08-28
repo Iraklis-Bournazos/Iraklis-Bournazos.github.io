@@ -75,7 +75,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   padding: 0 28px;
 }
 
-section { padding: 64px 0; border-top: 1px solid var(--line-soft); }
+section { padding: 48px 0; border-top: 1px solid var(--line-soft); }
 section:first-of-type { border-top: none; }
 
 /* ---------- top bar ---------- */
@@ -116,7 +116,7 @@ section:first-of-type { border-top: none; }
 
 /* ---------- hero ---------- */
 
-.hero { padding-top: 76px; padding-bottom: 20px; }
+.hero { padding-top: 58px; padding-bottom: 14px; }
 
 .hero-grid {
   display: grid;
@@ -197,7 +197,7 @@ h2 {
   text-transform: uppercase;
   color: var(--text-mute);
   font-weight: 500;
-  margin: 0 0 30px;
+  margin: 0 0 24px;
 }
 
 h3 {
@@ -386,7 +386,7 @@ h3 {
 
 footer {
   border-top: 1px solid var(--line-soft);
-  padding: 34px 0 60px;
+  padding: 28px 0 44px;
   font-size: 0.83rem;
   color: var(--text-mute);
 }
@@ -401,7 +401,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .edu-item { grid-template-columns: 1fr; gap: 6px; }
   .topnav { gap: 18px; font-size: 0.82rem; }
   .topnav a.hide-sm { display: none; }
-  section { padding: 48px 0; }
+  section { padding: 38px 0; }
 }
 
 /* ---------------------------------------------------------------
@@ -426,7 +426,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 }
 .back:hover { color: var(--accent); text-decoration: none; }
 
-.project-hero { padding-top: 56px; padding-bottom: 8px; }
+.project-hero { padding-top: 44px; padding-bottom: 6px; }
 .project-hero h1 {
   font-size: clamp(1.75rem, 4vw, 2.35rem);
   max-width: 20ch;
@@ -580,7 +580,20 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   margin: 0;
   line-height: 1.55;
 }
-.cv-contact a { color: var(--text-soft); }
+.cv-contact a {
+  color: var(--text-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 2px;
+}
+.cv-contact a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* the site link reads as "Personal page" on screen, as the URL when printed */
+.print-only { display: none; }
+@media print {
+  .screen-only { display: none; }
+  .print-only  { display: inline; }
+}
 
 .cv-qr { text-align: center; }
 .cv-qr { display: flex; justify-content: flex-end; align-items: center; }
@@ -823,3 +836,10 @@ ul.cols2 li { break-inside: avoid; }
 :root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 @media print { .theme-toggle { display: none !important; } }
+
+/* labelled facts inside CV entry lists (Grade — ..., Specialisation — ...) */
+.cv-body ul strong, ul.tight strong { color: var(--text); font-weight: 600; }
+.cv-body ul em, ul.tight em { font-style: italic; }
+@media print {
+  .cv-body ul strong, ul.tight strong { color: #000 !important; }
+}
