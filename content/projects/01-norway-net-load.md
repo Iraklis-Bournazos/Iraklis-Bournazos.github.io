@@ -43,7 +43,7 @@ mean annual municipality MAPE of **6.69%**, beating the benchmark in **347 of 35
 municipalities** and the linear-regression baseline in 246 of 350. Commercial reaches 9.66%,
 winning in 313 of 350.
 
-Industrial is structurally different: production schedules are uncorrelated with weather fluctuations. The recommendation is a two-category hybrid validated approach.
+Industrial is structurally different: production schedules are uncorrelated with weather fluctuations. The validated recommendation is a two-category hybrid.
 
 ## The synthetic experiment
 
@@ -57,6 +57,6 @@ invisibility, low penetration, and contamination in the registry, since Elhub's 
 pools residential, commercial, agricultural and industrial generation together.
 
 The operational answer is a conservative portfolio: deploy the prosumer-aware model only in
-the 48 municipalities (13.7%) where it has validated improved results across every fold, and the weather-based
+the 48 municipalities (13.7%) where it improves consistently across every fold, and the weather-based
 model elsewhere. For a DSO choosing between better models and better visibility of
 distributed generation, this says: improve the visibility first.

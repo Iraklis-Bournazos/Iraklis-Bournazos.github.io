@@ -9,6 +9,7 @@ You should never need to edit HTML by hand — edit the files in content/ instea
 """
 
 import html as _html
+import json
 import re
 from pathlib import Path
 
@@ -126,7 +127,7 @@ def tags_html(tags, muted=()):
     return "".join(out)
 
 
-def page(title, description, body, depth=0, cv_page=False, canon=""):
+def page(title, description, body, depth=0, cv_page=False, canon="", head_extra=""):
     """Wrap body content in the shared page shell."""
     up = "../" * depth
     cls = ' class="cv-page"' if cv_page else ""
@@ -155,6 +156,7 @@ def page(title, description, body, depth=0, cv_page=False, canon=""):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{up}style.css">
+{head_extra}
 <script>
   (function () {{
     try {{
@@ -246,6 +248,43 @@ def require(meta, keys, filename):
             f"\n!! {filename} is missing: {', '.join(missing)}\n"
             f"   Add each one on its own line between the --- lines, e.g.\n"
             f"   {missing[0]}: some text\n")
+
+
+def person_schema():
+    """schema.org Person for the homepage — tells search engines that this site,
+    the GitHub account and the LinkedIn profile are one and the same person."""
+    cv, _ = read(CONTENT / "cv.md")
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": cv["name"],
+        "url": f"https://{cv['site']}",
+        "image": f"{SITE_URL}/img/og-card.png",
+        "jobTitle": "Electric Power Engineer",
+        "email": f"mailto:{cv['email']}",
+        # locality only: the street address stays on the CV, out of structured data
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Stockholm",
+            "addressCountry": "SE",
+        },
+        "worksFor": {"@type": "Organization", "name": "rebase.energy",
+                     "url": "https://www.rebase.energy/"},
+        "alumniOf": [
+            {"@type": "CollegeOrUniversity",
+             "name": "KTH Royal Institute of Technology",
+             "sameAs": "https://www.kth.se/en"},
+            {"@type": "CollegeOrUniversity",
+             "name": "National Technical University of Athens",
+             "sameAs": "https://www.ntua.gr/en/"},
+        ],
+        "knowsAbout": ["Power systems", "Electricity markets",
+                       "Energy forecasting", "Machine learning", "Optimization"],
+        "sameAs": [f"https://{cv['github']}", f"https://www.{cv['linkedin']}"],
+    }
+    return ('<script type="application/ld+json">'
+            + json.dumps(data, ensure_ascii=False, indent=2)
+            + "</script>")
 
 
 def build_home(projects):
@@ -373,7 +412,8 @@ def build_home(projects):
 </section>
 """
     (ROOT / "index.html").write_text(
-        page(esc(home_meta["page_title"]), esc(home_meta["description"]), body, canon=""), encoding="utf-8"
+        page(esc(home_meta["page_title"]), esc(home_meta["description"]), body,
+             canon="", head_extra=person_schema()), encoding="utf-8"
     )
 
 

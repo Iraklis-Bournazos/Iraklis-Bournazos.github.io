@@ -35,5 +35,5 @@ so the ensemble can weight the base models differently per quantile.
 
 Pinball loss down roughly **60% against the benchmark**, R² from 0.46 to 0.84. The
 competition's top fifteen entries scored between **22.18 and 33.92 MWh**, so 29.39 sits
-among the leading entries on the leaderboard.
+within the range of the leading entries.
 
