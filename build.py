@@ -460,6 +460,8 @@ def build_cv():
         <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
         <b>LinkedIn:</b> <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
         <b>GitHub:</b> <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
+        <span class="only-sm"><b>Personal page:</b>
+          <a href="https://{esc(cv['site'])}">{esc(cv['site'])}</a></span>
       </p>
     </div>
     <a class="cv-qr" href="https://{esc(cv['site'])}">

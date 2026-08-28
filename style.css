@@ -691,11 +691,20 @@ ul.tight li { margin-bottom: 3px; }
 .cv-split h2 { margin-bottom: 9px; }
 
 @media screen and (max-width: 640px) {
-  .cv-head { grid-template-columns: 84px 1fr; }
+  .cv-head { grid-template-columns: 84px 1fr; gap: 16px; }
+  /* the photo must shrink with its column, or it overflows onto the text */
+  .cv-photo { width: 84px; height: 84px; }
+  .cv-id h1 { font-size: 1.5rem; }
+  .cv-contact { font-size: 0.78rem; word-break: break-word; }
+  /* a QR is useless on the screen you are holding — link to the page instead */
   .cv-qr { display: none; }
+  .only-sm { display: block; }
   .cv-entry { grid-template-columns: 1fr; gap: 2px; }
   .cv-split { grid-template-columns: 1fr; gap: 18px; }
 }
+
+/* shown only on phones, where the QR (which carries this link) is hidden */
+.only-sm { display: none; }
 
 /* ---------------------------------------------------------------
    Print — A4
