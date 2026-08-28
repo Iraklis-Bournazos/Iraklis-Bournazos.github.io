@@ -423,9 +423,7 @@ def build_cv():
         <div class="cv-when">{esc(p['when'])}</div>
         <div class="cv-body">
           <h3>{esc(p['title'])}</h3>
-          <p class="cv-sub">{esc(p['org'])}</p>
-          {f'<p class="cv-text"><strong>Tools &amp; software</strong>: {esc(p["tools"])}</p>'
-           if p.get("tools") else ''}
+          <p class="cv-sub">{esc(p['org'])}{f'<span class="cv-tools"> &nbsp;·&nbsp; <b>Tools:</b> {esc(p["tools"])}</span>' if p.get("tools") else ''}</p>
           {f'<p class="cv-text">{md_inline(p["text"])}</p>' if p.get("text") else ''}
         </div>
       </div>""" for p in cv["projects"])
@@ -457,9 +455,9 @@ def build_cv():
       <h1>{esc(cv['name'])}</h1>
       <p class="cv-tagline">{esc(cv['tagline'])}</p>
       <p class="cv-contact">
-        <b>Address:</b> {esc(cv['location'])} &nbsp;·&nbsp;
-        <b>Phone:</b> {esc(cv['phone'])}<br>
-        <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a> &nbsp;·&nbsp;
+        <b>Address:</b> {esc(cv['location'])}<br>
+        <b>Phone:</b> {esc(cv['phone'])} &nbsp;·&nbsp;
+        <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
         <b>LinkedIn:</b> <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
         <b>GitHub:</b> <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
       </p>
@@ -479,7 +477,7 @@ def build_cv():
 
   <section class="cv-section">
     <h2>Awards &amp; scholarships</h2>
-    <ul class="tight">{awards}</ul>
+    <ul class="tight cols2">{awards}</ul>
   </section>
 
 </article>
