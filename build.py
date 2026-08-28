@@ -304,6 +304,21 @@ def build_home(projects):
               f'{md_inline(home_meta["status"])}</div>'
               if home_meta.get("status") else "")
 
+    cv_btns = ""
+    if home_meta.get("cv_button"):
+        cv_btns += (
+            '<a class="btn primary" href="cv.html?print=1">'
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+            ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"'
+            ' aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/>'
+            '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>'
+            + esc(home_meta["cv_button"]) + '</a>')
+    if home_meta.get("cv_button_secondary"):
+        cv_btns += ('<a class="btn" href="cv.html">'
+                    + esc(home_meta["cv_button_secondary"]) + '</a>')
+    if cv_btns:
+        cv_btns = '<div class="hero-actions">' + cv_btns + '</div>'
+
     body = f"""
 <section class="hero">
   <div class="wrap">
@@ -315,6 +330,7 @@ def build_home(projects):
         {role}
         {home_body}
         {status}
+        {cv_btns}
       </div>
     </div>
   </div>
@@ -483,6 +499,19 @@ def build_cv():
   </section>
 
 </article>
+
+<script>
+  (function () {{
+    if (new URLSearchParams(window.location.search).get("print") !== "1") return;
+    window.addEventListener("load", function () {{
+      if (document.fonts && document.fonts.ready) {{
+        document.fonts.ready.then(function () {{ setTimeout(window.print, 250); }});
+      }} else {{
+        setTimeout(window.print, 600);
+      }}
+    }});
+  }})();
+</script>
 
 <div class="cv-actions bottom no-print">
   <button onclick="window.print()">

@@ -3,6 +3,8 @@ name: Iraklis Bournazos
 page_title: Iraklis Bournazos — Electrical & Computer Engineer NTUA — Electric Power Engineer KTH
 description: Electrical engineer working in power systems, forecasting, machine learning applications in energy systems. MSc Electric Power Engineering, KTH. Based in Stockholm.
 location: Stockholm, Sweden
+cv_button: Download CV (PDF)
+cv_button_secondary: View CV
 
 ---
 

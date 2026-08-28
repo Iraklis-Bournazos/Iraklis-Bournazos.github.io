@@ -898,3 +898,12 @@ ul.cols2 li { break-inside: avoid; }
   .cv-head { display: grid !important; align-items: center; }
   .cv-entry { display: grid !important; }
 }
+
+/* CV buttons in the homepage hero */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.hero-actions .btn svg { width: 15px; height: 15px; }
