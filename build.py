@@ -424,16 +424,18 @@ def build_cv():
         <div class="cv-body">
           <h3>{esc(p['title'])}</h3>
           <p class="cv-sub">{esc(p['org'])}</p>
-          <p class="cv-text">{md_inline(p['text'])}</p>
+          {f'<p class="cv-text"><strong>Tools &amp; software</strong>: {esc(p["tools"])}</p>'
+           if p.get("tools") else ''}
+          {f'<p class="cv-text">{md_inline(p["text"])}</p>' if p.get("text") else ''}
         </div>
       </div>""" for p in cv["projects"])
 
     skills = "".join(
-        f'<p class="cv-skill"><b>{esc(s["group"])}</b> — {esc(s["items"])}</p>'
+        f'<p class="cv-skill"><b>{esc(s["group"])}</b>: {esc(s["items"])}</p>'
         for s in cv["skills"]
     )
 
-    skills += f'<p class="cv-skill"><b>Languages</b> — {esc(cv["languages"])}</p>' 
+    skills += f'<p class="cv-skill"><b>Languages</b>: {md_inline(cv["languages"])}</p>' 
     awards = "".join(f"<li>{md_inline(a)}</li>" for a in cv["awards"])
 
     body = f"""
@@ -455,23 +457,24 @@ def build_cv():
       <h1>{esc(cv['name'])}</h1>
       <p class="cv-tagline">{esc(cv['tagline'])}</p>
       <p class="cv-contact">
-        {esc(cv['location'])} &nbsp;·&nbsp; {esc(cv['phone'])} &nbsp;·&nbsp;
-        <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
-        <a href="https://{esc(cv['site'])}"><span class="screen-only">Personal page</span><span class="print-only">{esc(cv['site'])}</span></a> &nbsp;·&nbsp;
-        <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
-        <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
+        <b>Address:</b> {esc(cv['location'])} &nbsp;·&nbsp;
+        <b>Phone:</b> {esc(cv['phone'])}<br>
+        <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a> &nbsp;·&nbsp;
+        <b>LinkedIn:</b> <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
+        <b>GitHub:</b> <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
       </p>
     </div>
-    <div class="cv-qr">
+    <a class="cv-qr" href="https://{esc(cv['site'])}">
       {qr}
-    </div>
+      <span>Personal page</span>
+    </a>
   </header>
 
   <p class="cv-summary">{md_inline(cv['summary'])}</p>
 
   <section class="cv-section"><h2>Experience</h2>{entries(cv['experience'])}</section>
   <section class="cv-section"><h2>Education</h2>{entries(cv['education'])}</section>
-  <section class="cv-section"><h2>Selected projects</h2>{projects}</section>
+  <section class="cv-section"><h2>Academic projects &amp; competitions</h2>{projects}</section>
   <section class="cv-section"><h2>Skills &amp; languages</h2>{skills}</section>
 
   <section class="cv-section">
@@ -480,6 +483,16 @@ def build_cv():
   </section>
 
 </article>
+
+<div class="cv-actions bottom no-print">
+  <button onclick="window.print()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+    </svg>
+    Save as PDF
+  </button>
+</div>
 """
     (ROOT / "cv.html").write_text(
         page(f"CV — {esc(cv['name'])}", esc(cv["tagline"]), body, cv_page=True, canon="cv.html"),

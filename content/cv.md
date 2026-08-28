@@ -1,7 +1,7 @@
 ---
 name: Iraklis Bournazos
 tagline: Electrical & Computer Engineer — Electric Power Engineer 
-location: Stockholm, Sweden
+location: Råsundavägen 106, 169 50 Solna, Sweden
 email: bournazosiraklis@gmail.com
 phone: "+46 70 498 45 95"
 linkedin: linkedin.com/in/iraklis-bournazos
@@ -32,8 +32,7 @@ experience:
     bullets:
       - Designed and implemented a modular end-to-end machine learning framework for
         day-ahead net load forecasting across 350 Norwegian municipalities, using
-        LightGBM, CatBoost, XGBoost and ensemble modelling on open Elhub AMI metering
-        data and ERA5 weather reanalysis.
+        LightGBM, CatBoost, XGBoost and ensemble modelling.
       - Investigated behind-the-meter solar PV penetration and grid observability, with
         the findings established through a controlled synthetic experiment.
       - Built the preprocessing and feature pipelines, with residual analysis, bias
@@ -44,7 +43,7 @@ experience:
     org: Electric Devices and Decision Systems Lab, NTUA
     place: Athens, Greece
     bullets:
-      - Researched artificial intelligence techniques for smart grids and power forecasting.
+      - Researched AI techniques for smart grids and power forecasting.
       - Worked with LSTM, Bi-LSTM, GRU, random forest and XGBoost models for wind power
         forecasting, and designed stacked meta-learning architectures.
 
@@ -53,33 +52,33 @@ experience:
     org: Climate Change Hub
     place: Athens, Greece
     bullets:
-      - Contributed to the development of the organisation's platform, and integrated
+      - Contributed to the development of the organisation's platform and integrated
         corporate social responsibility data from partner organisations.
 
 education:
   - when: Aug 2024 — Jun 2026
-    degree: MSc, Electric Power Engineering (two-year degree, 120 ECTS)
+    degree: MSc, Electric Power Engineering (2-year degree, 120 ECTS)
     org: KTH Royal Institute of Technology
     place: Stockholm, Sweden
     notes:
-      - "**Specialisation** — power system operation, planning, control and
-        electricity markets."
-      - "**Relevant coursework** — Power System Analysis, Wind Power Systems, Power
+      - "**Specialisation**: Power System Operation, Planning, Control and
+        Electricity Markets."
+      - "**Relevant coursework**: Power System Analysis, Wind Power Systems, Power
         System Planning, Electricity Market Analysis, Computer Applications & Machine
         Learning in Electric Power Systems, Electricity Pricing & Emissions,
         Communication & Control in Electric Power Systems, Power Grid Technology &
         Substation Design."
-      - "**Degree project** — *A Municipal-Scale Net Load Forecasting Framework for
+      - "**Degree project**: *A Municipal-Scale Net Load Forecasting Framework for
         Norway*, carried out at rebase.energy."
 
   - when: Dec 2018 — Apr 2024
-    degree: Diploma, Electrical and Computer Engineering (five-year degree, 300 ECTS)
+    degree: Diploma, Electrical and Computer Engineering (5-year degree, 300 ECTS)
     org: National Technical University of Athens
     place: Athens, Greece
     notes:
-      - "**Grade** — 8.01/10, approximately top 15% of the cohort."
-      - "**Specialisation** — electric power and energy systems."
-      - "**Diploma thesis** — *Wind Turbine Energy Forecasting with Machine Learning
+      - "**Grade**: 8.01/10, approximately top 15% of the cohort."
+      - "**Specialisation**: Electric Power and Energy Systems."
+      - "**Diploma thesis**:  *Wind Turbine Energy Forecasting with Machine Learning
         and Meta-Learning Methods*."
 
   - when: Sep 2021 — Apr 2024
@@ -87,52 +86,62 @@ education:
     org: American College of Greece
     place: Athens, Greece
     notes:
-      - "**GPA** — 3.68/4."
-      - "Taken alongside the NTUA diploma."
+      - "**GPA**: 3.68/4."
 
 projects:
-  - when: 2025
-    title: Multicriteria Load Control — price-responsive water heater controller
-    org: KTH EI2525, Electric Power Engineering Project
-    text: >
-      Built a prototype device for an optimization scheduler running a domestic water heater against spot prices and PV
-      forecasts, with a real-time supervisory loop on live smart-meter data. Raspberry Pi 5,
-      Arduino triac stage, zero-crossing detector.
+  - when: Feb 2026
+    title: Intraday Electricity Price Forecasting & Ensemble Modeling in European
+      Power Markets
+    org: Quantitative Energy Trading Competition · Nitor Energy, Denmark
+    tools: Python, GitHub
 
-  - when: 2025
-    title: Probabilistic renewable generation forecasting, East England
-    org: KTH EG2140 
-    text: >
-      Day-ahead probabilistic forecasts for Hornsea 1 and East England solar, submitted as
-      quantiles and scored on pinball loss. Random forest, LightGBM and CatBoost ensemble modelling.
+  - when: Sep 2025 — Jan 2026
+    title: Multicriteria Load Control
+    org: Electric Power Engineering Project · KTH
+    tools: Python, MATLAB, Raspberry Pi, Arduino
 
-  - when: 2025
-    title: Wind farm feasibility and techno-economic study, bidding zone SE3
-    org: KTH EG2340, Wind Power Systems
-    text: >
-      80 MW wind farm feasibility study in central Sweden — turbine selection, layout and electrical topology,
-      grid connection costing, LCOE and NPV across an investment range, BESS optimization and sizing.
+  - when: Sep 2025 — Jan 2026
+    title: "Complete study for the installation of a large wind farm with BESS in
+      Sweden: optimal sizing, turbine and layout optimization, grid integration and
+      techno-economic evaluation"
+    org: Wind Power Systems · KTH
+    tools: Python, MATLAB, Excel
 
-  - when: 2025
-    title: Hydro scheduling and power system planning
-    org: KTH EG2240, Power System Planning
-    text: >
-      Deterministic and stochastic short-term and long-term hydro scheduling for a cascaded
-      four-plant river system in GAMS, with Monte Carlo valuation of flexibility across SE1–SE4.
+  - when: Mar 2025 — Jun 2025
+    title: Forecasting of Renewable Energy in East England Using Machine Learning
+      Models and Multi-Model Ensemble
+    org: Computer Applications & Machine Learning in Electric Power Systems · KTH
+    tools: Python, GitHub
+
+  - when: Jan 2025 — Jun 2025
+    title: Deterministic, Stochastic Short-Term and Dynamic Long-Term Hydro Scheduling
+    org: Power System Planning · KTH
+    tools: GAMS
+
+  - when: Aug 2024 — Jan 2025
+    title: "Analysis and modeling of DC, synchronous and induction machines: parameter
+      estimation from lab data, modeling and torque/MTPA analysis"
+    org: Electrical Machines & Drives · KTH
+    tools: MATLAB, Simulink
+
+  - when: Aug 2024 — Oct 2024
+    title: Design of a Step-Down (Buck) DC-DC Converter
+    org: Power Electronics · KTH
+    tools: MATLAB, PSpice
 
 skills:
   - group: Programming
     items: Python, MATLAB, GAMS, Octave, Git/GitHub
-  - group: Data & machine learning
+  - group: Data & Machine Learning
     items: pandas, polars, NumPy, xarray, GeoPandas, scikit-learn, LightGBM, CatBoost,
-      XGBoost, PyTorch, Hugging Face Chronos, conformal prediction (puncc)
+      XGBoost, keras, PyTorch, Hugging Face Chronos, conformal prediction (puncc)
   - group: Power system tools
     items: PandaPower, PowerFactory, Simulink, ARISTO, PSpice, LTspice, PLECS, FEMM, pvlib
   - group: Energy data
     items: Elhub, ENTSO-E, Nord Pool, ERA5, SMHI, Kartverket
 
-languages: "English — fluent (C2) · Greek — native · French — intermediate (B2) ·
-  Swedish — beginner (A2), actively learning"
+languages: "English (fluent, C2) · Greek (native) · French (intermediate, B2) ·
+  Swedish (beginner A2, actively learning)"
 
 awards:
   - "Stavros Niarchos Foundation Scholarship for Academic Excellence, 2021–2024"

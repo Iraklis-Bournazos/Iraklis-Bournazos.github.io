@@ -75,7 +75,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   padding: 0 28px;
 }
 
-section { padding: 48px 0; border-top: 1px solid var(--line-soft); }
+section { padding: 56px 0 50px; border-top: 1px solid var(--line); }
 section:first-of-type { border-top: none; }
 
 /* ---------- top bar ---------- */
@@ -197,7 +197,7 @@ h2 {
   text-transform: uppercase;
   color: var(--text-mute);
   font-weight: 500;
-  margin: 0 0 24px;
+  margin: 0 0 26px;
 }
 
 h3 {
@@ -401,7 +401,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .edu-item { grid-template-columns: 1fr; gap: 6px; }
   .topnav { gap: 18px; font-size: 0.82rem; }
   .topnav a.hide-sm { display: none; }
-  section { padding: 38px 0; }
+  section { padding: 42px 0 38px; }
 }
 
 /* ---------------------------------------------------------------
@@ -536,7 +536,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 .cv {
   max-width: 800px;
-  margin: 26px auto 80px;
+  margin: 26px auto 20px;
   padding: 0 28px;
   font-size: 0.94rem;
   line-height: 1.5;
@@ -546,7 +546,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 .cv-head {
   display: grid;
-  grid-template-columns: 118px 1fr 67px;
+  grid-template-columns: 118px 1fr 84px;
   gap: 26px;
   align-items: center;
   padding-bottom: 18px;
@@ -580,6 +580,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   margin: 0;
   line-height: 1.55;
 }
+.cv-contact b { font-weight: 600; color: var(--text); }
 .cv-contact a {
   color: var(--text-soft);
   text-decoration: underline;
@@ -588,23 +589,26 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 }
 .cv-contact a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-/* the site link reads as "Personal page" on screen, as the URL when printed */
-.print-only { display: none; }
-@media print {
-  .screen-only { display: none; }
-  .print-only  { display: inline; }
+/* the QR encodes https://iraklis-bournazos.github.io — it is the "Personal page" link */
+.cv-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
 }
-
-.cv-qr { text-align: center; }
-.cv-qr { display: flex; justify-content: flex-end; align-items: center; }
-.cv-qr svg { width: 67px; height: 67px; display: block; }
+.cv-qr:hover { text-decoration: none; }
+.cv-qr:hover span { color: var(--accent); }
+.cv-qr svg { width: 72px; height: 72px; display: block; }
 .cv-qr span {
   display: block;
   font-family: var(--mono);
-  font-size: 0.56rem;
+  font-size: 0.58rem;
+  line-height: 1.2;
+  text-align: center;
   color: var(--text-mute);
-  margin-top: 3px;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cv-qr svg .qrline { stroke: var(--text); }
@@ -621,7 +625,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 /* sections */
 
-.cv-section { margin-top: 18px; }
+.cv-section { margin-top: 28px; }
 .cv-section h2 {
   font-family: var(--sans);
   font-size: 0.72rem;
@@ -629,8 +633,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--text);
-  margin: 0 0 10px;
-  padding-bottom: 5px;
+  margin: 0 0 13px;
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -638,7 +642,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   display: grid;
   grid-template-columns: 138px 1fr;
   gap: 22px;
-  margin-bottom: 11px;
+  margin-bottom: 14px;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -843,3 +847,10 @@ ul.cols2 li { break-inside: avoid; }
 @media print {
   .cv-body ul strong, ul.tight strong { color: #000 !important; }
 }
+
+/* second Save-as-PDF button, bottom right of the CV */
+.cv-actions.bottom { margin: 0 auto 72px; }
+
+/* "Tools & software:" label on CV project entries */
+.cv-text strong { color: var(--text); font-weight: 600; }
+@media print { .cv-text strong { color: #000 !important; } }
