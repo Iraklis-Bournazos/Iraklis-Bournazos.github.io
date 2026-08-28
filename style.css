@@ -629,7 +629,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
    page-level `section` padding (42px top + 38px bottom) and its divider —
    which was adding a blank band and a stray rule above every CV heading */
 .cv-section {
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 0;
   border-top: none;
 }
@@ -640,7 +640,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--text);
-  margin: 0 0 13px;
+  margin: 0 0 11px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
 }
@@ -743,7 +743,7 @@ ul.tight li { margin-bottom: 3px; }
 
   .cv-head { border-bottom-color: #000 !important; gap: 22px; }
   .cv-section h2 { font-size: 8.1pt; color: #000 !important; border-bottom-color: #999 !important;
-                   margin-bottom: 7px; padding-bottom: 3px; }
+                   margin-bottom: 6px; padding-bottom: 4px; }
   .cv-when { font-size: 8.2pt; color: #555 !important; }
   .cv-body h3 { font-size: 9.5pt; color: #000 !important; }
   .cv-sub { font-size: 8.6pt; color: #555 !important; }
@@ -758,7 +758,7 @@ ul.tight li { margin-bottom: 3px; }
   .cv-section { break-inside: auto; page-break-inside: auto; }
   .cv-section h2 { break-after: avoid; page-break-after: avoid; }
   .cv-entry { break-inside: avoid; page-break-inside: avoid; margin-bottom: 6px; }
-  .cv-section { margin-top: 12px; }
+  .cv-section { margin-top: 22px; }
 
   a { color: #000 !important; text-decoration: none !important; }
   .cv-photo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
