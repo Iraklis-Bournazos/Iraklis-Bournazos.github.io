@@ -625,7 +625,14 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 /* sections */
 
-.cv-section { margin-top: 20px; }
+/* the CV sections are <section> elements, so without this they inherit the
+   page-level `section` padding (42px top + 38px bottom) and its divider —
+   which was adding a blank band and a stray rule above every CV heading */
+.cv-section {
+  margin-top: 20px;
+  padding: 0;
+  border-top: none;
+}
 .cv-section h2 {
   font-family: var(--sans);
   font-size: 0.72rem;
@@ -874,7 +881,7 @@ ul.cols2 li { break-inside: avoid; }
   .cv-head { grid-template-columns: 92px 1fr 70px; gap: 16px; }
   .cv-photo { width: 92px; height: 92px; }
   .cv-qr svg { width: 62px; height: 62px; }
-  .cv-qr span { font-size: 5.4pt; }
+  .cv-qr span { font-size: 6.4pt; color: #444 !important; }
   ul.cols2 { columns: 2; column-gap: 22px; }
 }
 
