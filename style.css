@@ -899,11 +899,18 @@ ul.cols2 li { break-inside: avoid; }
   .cv-entry { display: grid !important; }
 }
 
-/* CV buttons in the homepage hero */
+/* CV buttons in the homepage hero — smaller than the contact buttons,
+   and set further apart so the two do not read as one control */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 18px;
+  margin-top: 22px;
 }
-.hero-actions .btn svg { width: 15px; height: 15px; }
+.hero-actions .btn {
+  padding: 7px 14px;
+  font-size: 0.84rem;
+  border-radius: 6px;
+  gap: 7px;
+}
+.hero-actions .btn svg { width: 13px; height: 13px; }
