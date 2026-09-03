@@ -127,6 +127,14 @@ def tags_html(tags, muted=()):
     return "".join(out)
 
 
+def where_html(where):
+    """'KTH Royal Institute of Technology · Stockholm' -> institution bold, city plain."""
+    inst, sep, rest = str(where or "").partition("·")
+    if not sep:
+        return esc(where)
+    return f"<b>{esc(inst.strip())}</b> · {esc(rest.strip())}"
+
+
 def page(title, description, body, depth=0, cv_page=False, canon="", head_extra=""):
     """Wrap body content in the shared page shell."""
     up = "../" * depth
@@ -268,8 +276,6 @@ def person_schema():
             "addressLocality": "Stockholm",
             "addressCountry": "SE",
         },
-        "worksFor": {"@type": "Organization", "name": "rebase.energy",
-                     "url": "https://www.rebase.energy/"},
         "alumniOf": [
             {"@type": "CollegeOrUniversity",
              "name": "KTH Royal Institute of Technology",
@@ -332,7 +338,7 @@ def build_home(projects):
       <div class="edu-when">{esc(e['when'])}</div>
       <div>
         <h3>{esc(e['title'])}</h3>
-        <p class="where">{esc(e['where'])}</p>
+        <p class="where">{where_html(e['where'])}</p>
         <p class="note">{md_inline(e['note'])}</p>
       </div>
     </div>""" for e in bg_meta.get("entries", []))
@@ -468,7 +474,7 @@ def build_cv():
             notes = "".join(f"<li>{md_inline(n)}</li>" for n in e.get("notes", []))
             head = (f"{esc(e['role'])} <span class=\"at\">·</span> {esc(e['org'])}"
                     if "role" in e else f"{esc(e['degree'])}")
-            sub = esc(e.get("org", "")) if "degree" in e else ""
+            sub = f'<b>{esc(e["org"])}</b>' if "degree" in e else ""
             out.append(f"""
       <div class="cv-entry">
         <div class="cv-when">{esc(e['when'])}</div>

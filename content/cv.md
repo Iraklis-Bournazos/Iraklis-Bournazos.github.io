@@ -9,10 +9,10 @@ github: github.com/Iraklis-Bournazos
 site: iraklis-bournazos.github.io
 
 summary: >
-  Electrical and Computer Engineer from the National Technical University of Athens (NTUA) with an MSc in Electric Power Engineering from KTH Royal Institute of Technology. I work at the intersection of power systems, electricity markets, forecasting and machine learning, combining physical understanding of energy systems with data-driven methods. My focus is on turning complex energy-system behaviour into rigorous, practical and deployable solutions, with a methodical and application-oriented approach to making power systems smarter, more efficient and better prepared for the energy transition. 
+  Electrical and Computer Engineer from the National Technical University of Athens (NTUA) with an MSc in Electric Power Engineering from KTH Royal Institute of Technology. I work at the intersection of power systems, electricity markets, forecasting and machine learning, combining physical understanding of energy systems with data-driven methods. My focus is on turning complex energy-system behaviour into rigorous, practical and deployable solutions, with a methodical and application-oriented approach to making power systems smarter, more efficient and better prepared for the energy transition.
 
 experience:
-  - when: Jun 2026 — present
+  - when: Jun 2026 — Sep 2026
     role: Data Scientist Intern
     org: rebase.energy
     place: Stockholm, Sweden

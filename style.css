@@ -739,7 +739,7 @@ ul.tight li { margin-bottom: 3px; }
   .cv-id h1 { font-size: 21pt; }
   .cv-tagline { font-size: 10.2pt; color: #333 !important; }
   .cv-contact, .cv-contact a { font-size: 8.4pt; color: #444 !important; }
-  .cv-summary { font-size: 9.2pt; color: #222 !important; margin: 9px 0 2px; }
+  .cv-summary { font-size: 9.1pt; color: #222 !important; margin: 9px 0 2px; }
 
   .cv-head { border-bottom-color: #000 !important; gap: 22px; }
   .cv-section h2 { font-size: 8.1pt; color: #000 !important; border-bottom-color: #999 !important;
@@ -930,3 +930,9 @@ section[id],
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+/* the institution name in an education entry — bold and full-strength inside the
+   otherwise-muted sub line, so KTH and NTUA read at a glance */
+.cv-sub b { font-weight: 600; color: var(--text); }
+.edu-item .where b { font-weight: 600; color: var(--text); }
+@media print { .cv-sub b { color: #000 !important; } }
