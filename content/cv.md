@@ -130,11 +130,11 @@ projects:
     tools: MATLAB, PSpice
 
 skills:
-  - group: Programming
-    items: Python, MATLAB, GAMS, Octave, Git/GitHub
+  - group: Programming & tooling
+    items: Python, MATLAB, GAMS, Octave, Git/GitHub, Modal
   - group: Data & Machine Learning
     items: pandas, polars, NumPy, xarray, GeoPandas, scikit-learn, LightGBM, CatBoost,
-      XGBoost, keras, PyTorch, Hugging Face Chronos, conformal prediction (puncc)
+      XGBoost, keras, PyTorch, Hugging Face Chronos, Optuna, conformal prediction (puncc)
   - group: Power system tools
     items: PandaPower, PowerFactory, Simulink, ARISTO, PSpice, LTspice, PLECS, FEMM, pvlib
   - group: Energy data
