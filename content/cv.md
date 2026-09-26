@@ -13,7 +13,7 @@ summary: >
 
 experience:
   - when: Jun 2026 — Sep 2026
-    role: Data Scientist Intern
+    role: Junior Data Scientist
     org: rebase.energy
     place: Stockholm, Sweden
     bullets:
