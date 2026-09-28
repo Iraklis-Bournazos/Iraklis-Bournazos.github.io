@@ -739,23 +739,30 @@ ul.tight li { margin-bottom: 3px; }
   }
 
   .cv-id h1 { font-size: 21pt; }
-  .cv-tagline { font-size: 10.2pt; color: #333 !important; }
-  .cv-contact, .cv-contact a { font-size: 8.4pt; color: #444 !important; }
-  .cv-summary { font-size: 9.1pt; color: #222 !important; margin: 9px 0 2px; }
+  .cv-tagline { font-size: 11pt; color: #333 !important; }
+  .cv-contact, .cv-contact a { font-size: 9pt; color: #444 !important; }
+  .cv-summary { font-size: 9.8pt; color: #222 !important; margin: 9px 0 2px; }
 
   .cv-head { border-bottom-color: #000 !important; gap: 22px; }
-  .cv-section h2 { font-size: 8.1pt; color: #000 !important; border-bottom-color: #999 !important;
+  .cv-section h2 { font-size: 9pt; color: #000 !important; border-bottom-color: #999 !important;
                    margin-bottom: 6px; padding-bottom: 4px; }
-  .cv-when { font-size: 8.2pt; color: #555 !important; }
-  .cv-body h3 { font-size: 9.5pt; color: #000 !important; }
-  .cv-sub { font-size: 8.6pt; color: #555 !important; }
-  .cv-body ul, .cv-text, ul.tight { font-size: 9.0pt; color: #222 !important; }
+  .cv-when { font-size: 9.5pt; color: #555 !important; }
+  .cv-body h3 { font-size: 10pt; color: #000 !important; }
+  .cv-sub { font-size: 9.3pt; color: #555 !important; }
+  .cv-body ul, .cv-text, ul.tight { font-size: 9.5pt; color: #222 !important; }
   .cv-body li { margin-bottom: 2.5px; }
   ul.tight li { margin-bottom: 2.5px; }
-  .cv-entry { grid-template-columns: 116px 1fr; gap: 15px; }
-  .cv-when { font-size: 8.1pt; white-space: nowrap; }
+  .cv-entry { grid-template-columns: 136px 1fr; gap: 15px; }
+  .cv-when { font-size: 9.5pt; white-space: nowrap; }
   .cv-head { padding-bottom: 12px; }
   .cv-sub { margin-bottom: 3px; }
+  /* the institution line of an education entry (the only sub line led by <b>) */
+  .cv-sub:has(> b) { font-size: 9.7pt; }
+  /* the date shares its title's baseline, so it copies out on the same line */
+  .cv-entry { align-items: baseline; }
+  .cv-when { padding-top: 0; }
+  /* no lone word on the last line of a paragraph, bullet or title */
+  .cv p, .cv li, .cv h3 { text-wrap: pretty; }
 
   .cv-section { break-inside: auto; page-break-inside: auto; }
   .cv-section h2 { break-after: avoid; page-break-after: avoid; }
@@ -777,7 +784,7 @@ ul.cols2 li { break-inside: avoid; }
 }
 .cv-skill b { color: var(--text); font-weight: 600; }
 @media print {
-  .cv-skill { font-size: 8.6pt; color: #222 !important; margin-bottom: 2px; }
+  .cv-skill { font-size: 9.3pt; color: #222 !important; margin-bottom: 2px; }
   .cv-skill b { color: #000 !important; }
 }
 

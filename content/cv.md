@@ -9,7 +9,7 @@ github: github.com/Iraklis-Bournazos
 site: iraklis-bournazos.github.io
 
 summary: >
-  Electrical and Computer Engineer from the National Technical University of Athens (NTUA) with an MSc in Electric Power Engineering from KTH Royal Institute of Technology. I work at the intersection of power systems, electricity markets, forecasting and machine learning, combining physical understanding of energy systems with data-driven methods. My focus is on turning complex energy-system behaviour into rigorous, practical and deployable solutions, with a methodical and application-oriented approach to making power systems smarter, more efficient and better prepared for the energy transition.
+  Electrical and Computer Engineer from the National Technical University of Athens (NTUA) with a Master of Science in Electric Power Engineering from KTH Royal Institute of Technology. I work at the intersection of power systems, electricity markets, forecasting and machine learning, combining physical understanding of energy systems with data-driven methods. My focus is on turning complex energy-system behaviour into rigorous, practical and deployable solutions, with a methodical and application-oriented approach to making power systems smarter, more efficient and ready for the energy transition.
 
 experience:
   - when: Jun 2026 — Sep 2026
@@ -23,14 +23,14 @@ experience:
         calibration, together with directional and extreme-imbalance probabilities.
       - Built per-horizon feature-selection and analysis pipelines across NWP,
         intraday and day-ahead market data, and integrated transformer-based
-        time-series foundation models as additional forecasting signals.
+        time-series foundation models as forecasting signals.
 
   - when: Jan 2026 — May 2026
     role: MSc Thesis Project
     org: rebase.energy
     place: Stockholm, Sweden
     bullets:
-      - Designed and implemented a modular end-to-end machine learning framework for
+      - Designed and implemented a machine learning framework for
         day-ahead net load forecasting across 350 Norwegian municipalities, using
         LightGBM, CatBoost, XGBoost and ensemble modelling.
       - Investigated behind-the-meter solar PV penetration and grid observability, with
@@ -53,7 +53,7 @@ experience:
     place: Athens, Greece
     bullets:
       - Contributed to the development of the organisation's platform and integrated
-        corporate social responsibility data from partner organisations.
+        climate and energy data from partner organisations.
 
 education:
   - when: Aug 2024 — Jun 2026
@@ -69,7 +69,7 @@ education:
         Communication & Control in Electric Power Systems, Power Grid Technology &
         Substation Design."
       - "**Degree project**: *A Municipal-Scale Net Load Forecasting Framework for
-        Norway*, carried out at rebase.energy."
+        Norway*."
 
   - when: Dec 2018 — Apr 2024
     degree: Diploma, Electrical and Computer Engineering (5-year degree, 300 ECTS)
@@ -90,7 +90,7 @@ education:
 
 projects:
   - when: Feb 2026
-    title: Intraday Electricity Price Forecasting & Ensemble Modeling in European
+    title: Intraday Electricity Price Forecasting & Ensemble Modelling in European
       Power Markets
     org: Quantitative Energy Trading Competition · Nitor Energy, Denmark
     tools: Python, GitHub
@@ -102,7 +102,7 @@ projects:
 
   - when: Sep 2025 — Jan 2026
     title: "Complete study for the installation of a large wind farm with BESS in
-      Sweden: optimal sizing, turbine and layout optimization, grid integration and
+      Sweden: optimal sizing, turbine and layout optimisation, grid integration and
       techno-economic evaluation"
     org: Wind Power Systems · KTH
     tools: Python, MATLAB, Excel
@@ -119,8 +119,8 @@ projects:
     tools: GAMS
 
   - when: Aug 2024 — Jan 2025
-    title: "Analysis and modeling of DC, synchronous and induction machines: parameter
-      estimation from lab data, modeling and torque/MTPA analysis"
+    title: "Analysis and modelling of DC, synchronous and induction machines: parameter
+      estimation from lab data, modelling and torque/MTPA analysis"
     org: Electrical Machines & Drives · KTH
     tools: MATLAB, Simulink
 
@@ -134,9 +134,9 @@ skills:
     items: Python, MATLAB, GAMS, Octave, Git/GitHub, Modal
   - group: Data & Machine Learning
     items: pandas, polars, NumPy, xarray, GeoPandas, scikit-learn, LightGBM, CatBoost,
-      XGBoost, keras, PyTorch, Hugging Face Chronos, Optuna, conformal prediction (puncc)
+      XGBoost, Keras, PyTorch, Hugging Face Chronos, Optuna, conformal prediction (puncc)
   - group: Power system tools
-    items: PandaPower, PowerFactory, Simulink, ARISTO, PSpice, LTspice, PLECS, FEMM, pvlib
+    items: pandapower, PowerFactory, Simulink, ARISTO, PSpice, LTspice, PLECS, FEMM, pvlib
   - group: Energy data
     items: Elhub, ENTSO-E, Nord Pool, ERA5, SMHI, Kartverket
 
