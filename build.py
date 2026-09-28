@@ -523,7 +523,7 @@ def build_cv():
     <div class="cv-id">
       <h1>{esc(cv['name'])}</h1>
       <p class="cv-tagline">{esc(cv['tagline'])}</p>
-      <p class="cv-contact">
+      <p class="cv-contact screen-only">
         <b>Address:</b> {esc(cv['location'])}<br>
         <b>Phone:</b> {esc(cv['phone'])} &nbsp;·&nbsp;
         <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
@@ -531,6 +531,14 @@ def build_cv():
         <b>GitHub:</b> <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a>
         <span class="only-sm"><b>Personal page:</b>
           <a href="https://{esc(cv['site'])}">{esc(cv['site'])}</a></span>
+      </p>
+      <p class="cv-contact print-only">
+        <b>Address:</b> {esc(cv['location'])} &nbsp;·&nbsp;
+        <b>Phone:</b> {esc(cv['phone'])}<br>
+        <b>LinkedIn:</b> <a href="https://{esc(cv['linkedin'])}">{esc(cv['linkedin'])}</a> &nbsp;·&nbsp;
+        <b>Email:</b> <a href="mailto:{esc(cv['email'])}">{esc(cv['email'])}</a><br>
+        <b>GitHub:</b> <a href="https://{esc(cv['github'])}">{esc(cv['github'])}</a> &nbsp;·&nbsp;
+        <b>Personal page:</b> <a href="https://{esc(cv['site'])}">{esc(cv['site'])}</a>
       </p>
     </div>
     <a class="cv-qr" href="https://{esc(cv['site'])}">

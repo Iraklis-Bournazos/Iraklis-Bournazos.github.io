@@ -712,6 +712,8 @@ ul.tight li { margin-bottom: 3px; }
 
 /* shown only on phones, where the QR (which carries this link) is hidden */
 .only-sm { display: none; }
+/* the CV's print-only contact block (see the print rules below) */
+.print-only { display: none; }
 
 /* ---------------------------------------------------------------
    Print — A4
@@ -762,7 +764,6 @@ ul.tight li { margin-bottom: 3px; }
 
   a { color: #000 !important; text-decoration: none !important; }
   .cv-photo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .cv-qr svg .qrline { stroke: #000 !important; }
 }
 
 ul.cols2 { columns: 2; column-gap: 30px; }
@@ -878,10 +879,8 @@ ul.cols2 li { break-inside: avoid; }
 
 /* print: a smaller photo shortens the tallest unbreakable block on the page */
 @media print {
-  .cv-head { grid-template-columns: 104px 1fr 76px; gap: 20px; }
+  .cv-head { grid-template-columns: 104px 1fr; gap: 20px; }
   .cv-photo { width: 104px; height: 104px; }
-  .cv-qr svg { width: 68px; height: 68px; }
-  .cv-qr span { font-size: 6.9pt; color: #444 !important; }
   ul.cols2 { columns: 2; column-gap: 22px; }
 }
 
@@ -900,10 +899,15 @@ ul.cols2 li { break-inside: avoid; }
     --line: #999999;
     --line-soft: #cccccc;
   }
-  /* the QR is hidden at phone widths; printing must always show it */
-  .cv-qr { display: flex !important; }
   .cv-head { display: grid !important; align-items: center; }
   .cv-entry { display: grid !important; }
+
+  /* an ATS reads a PDF as text, not as a picture: the personal page is a
+     link in the contact block instead of the QR, and the print contact
+     block pairs its items two to a line */
+  .cv-qr, .screen-only { display: none !important; }
+  .print-only { display: block !important; }
+  .cv-contact a { white-space: nowrap; }
 }
 
 /* CV buttons in the homepage hero — smaller than the contact buttons,
@@ -936,3 +940,20 @@ section[id],
 .cv-sub b { font-weight: 600; color: var(--text); }
 .edu-item .where b { font-weight: 600; color: var(--text); }
 @media print { .cv-sub b { color: #000 !important; } }
+
+/* print: system fonts instead of the Google variable fonts. Chromium embeds
+   Inter and Newsreader as Type 3 fonts, and with letter-spacing and feature
+   settings the PDF text copies out broken ("Elec / trical") — so an ATS may
+   read it that way too. Screen styles are unaffected. */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"] {
+    --sans:  Arial, Helvetica, sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+  }
+  *, *::before, *::after {
+    letter-spacing: normal !important;
+    font-feature-settings: normal !important;
+  }
+}
